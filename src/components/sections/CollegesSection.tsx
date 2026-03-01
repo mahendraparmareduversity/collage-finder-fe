@@ -1,4 +1,4 @@
-import { Search, ArrowRight, Loader2 } from 'lucide-react';
+import { Search, ArrowRight, Loader2, X } from 'lucide-react';
 import { CourseCategory, College, FilterState } from '../../types';
 import type { ApiCourse } from '../../types';
 import { Pagination } from '../../types';
@@ -45,6 +45,10 @@ export default function CollegesSection({
 }: CollegesSectionProps) {
   const { ref, isVisible } = useScrollAnimation();
   const showCourseTabs = courses.length > 0 && onCourseChange;
+  const selectedCourse = showCourseTabs && filters.courseId
+    ? courses.find((c) => c._id === filters.courseId)
+    : null;
+  const isAllSelected = !filters.courseId;
 
   return (
     <section id="colleges" className="bg-white py-20 px-4 sm:px-6">
@@ -60,6 +64,22 @@ export default function CollegesSection({
           highlight="in India"
         />
 
+        {selectedCourse && onCourseChange && (
+          <div className="mb-4 flex items-center gap-2 flex-wrap">
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-cta/10 text-cta text-sm font-medium">
+              Colleges for: {selectedCourse.name}
+              <button
+                type="button"
+                onClick={() => onCourseChange(null)}
+                className="p-0.5 rounded hover:bg-cta/20"
+                aria-label="Clear course filter"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </span>
+          </div>
+        )}
+
         {error && (
           <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm">
             {error}
@@ -73,26 +93,29 @@ export default function CollegesSection({
               <button
                 onClick={() => onCourseChange(null)}
                 className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
-                  !filters.courseId
+                  isAllSelected
                     ? 'bg-white text-neutral-text shadow-md border border-neutral-border'
                     : 'text-neutral-muted hover:text-neutral-text'
                 }`}
               >
                 All
               </button>
-              {courses.map((c) => (
-                <button
-                  key={c._id}
-                  onClick={() => onCourseChange(c._id)}
-                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
-                    filters.courseId === c._id
-                      ? 'bg-white text-neutral-text shadow-md border border-neutral-border'
-                      : 'text-neutral-muted hover:text-neutral-text'
-                  }`}
-                >
-                  {c.name}
-                </button>
-              ))}
+              {courses.map((c) => {
+                const isSelected = filters.courseId === c._id;
+                return (
+                  <button
+                    key={c._id}
+                    onClick={() => onCourseChange(c._id)}
+                    className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                      isSelected
+                        ? 'bg-white text-neutral-text shadow-md border border-neutral-border'
+                        : 'text-neutral-muted hover:text-neutral-text'
+                    }`}
+                  >
+                    {c.name}
+                  </button>
+                );
+              })}
             </>
           ) : (
             CATEGORY_TABS.map((cat) => (

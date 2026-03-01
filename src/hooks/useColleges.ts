@@ -19,7 +19,7 @@ export function useColleges() {
     courseId: null,
   });
   const [sort, setSort] = useState<CollegeListSort>('name_asc');
-  const [page, setPage] = useState(1);
+  const [, setPage] = useState(1);
   const [colleges, setColleges] = useState<College[]>([]);
   const [pagination, setPagination] = useState<CollegesListPagination | undefined>(undefined);
   const [loading, setLoading] = useState(useApi);
@@ -81,7 +81,7 @@ export function useColleges() {
   }, [useApi, filters.category, filters.courseId, filters.state, filters.searchQuery, sort]);
 
   const setCategory = useCallback((category: CourseCategory) => {
-    setFilters((prev) => ({ ...prev, category }));
+    setFilters((prev) => ({ ...prev, category, courseId: null }));
     setPage(1);
   }, []);
 
@@ -104,10 +104,6 @@ export function useColleges() {
     setFilters({ category: CATEGORY_ALL, state: STATE_ALL, searchQuery: '', courseId: null });
     setPage(1);
   }, []);
-
-  const loadMore = useCallback(() => {
-    if (pagination?.hasNext) setPage((p) => p + 1);
-  }, [pagination?.hasNext]);
 
   const appendNextPage = useCallback(async () => {
     if (!useApi || !pagination?.hasNext) return;

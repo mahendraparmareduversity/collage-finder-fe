@@ -1,38 +1,46 @@
-import { GraduationCap, Mail, Share2 } from 'lucide-react';
+import { Mail } from 'lucide-react';
 
 const SUPPORT_EMAIL = 'support@collegewale.in';
 
 export default function Footer() {
-  const links = {
-    Courses: [
-      'B.Tech / Engineering', 'MBA / PGDM', 'MBBS / Medical',
-      'Law (LLB / BA LLB)', 'B.Com / M.Com', 'BCA / MCA', 'B.Design',
-    ],
-    Exams: [
-      'JEE Main & Advanced', 'CAT / MAT', 'NEET UG', 'CLAT',
-      'GATE', 'CUET', 'GMAT / GRE',
-    ],
-    'Quick Links': [
-      'College Predictor', 'Compare Colleges', 'Scholarships',
-      'Campus Life', 'Career Library', 'Contact Us',
-    ],
-  };
+  const exploreLinks = [
+    { label: 'Top Colleges', href: '#colleges' },
+    { label: 'Explore Courses', href: '#courses' },
+    { label: 'Events', href: '#events' },
+    { label: 'Free Counselling', href: '#cta' },
+    { label: 'FAQ', href: '#faq' },
+  ];
+
+  const courseLinks = [
+    { label: 'B.Tech / Engineering', href: '#colleges' },
+    { label: 'MBA / PGDM', href: '#colleges' },
+    { label: 'MBBS / Medical', href: '#colleges' },
+    { label: 'Law (LLB)', href: '#colleges' },
+    { label: 'B.Com / M.Com', href: '#colleges' },
+    { label: 'BCA / MCA', href: '#colleges' },
+    { label: 'B.Design', href: '#colleges' },
+  ];
+
+  const quickLinks = [
+    { label: 'Compare Colleges', href: '#colleges' },
+    { label: 'Contact Us', href: `mailto:${SUPPORT_EMAIL}` },
+  ];
 
   return (
     <footer className="text-neutral-on-dark bg-navy">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-10 border-b border-white/10">
+          {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-cta rounded-btn flex items-center justify-center">
-                <GraduationCap className="w-5 h-5 text-white" />
-              </div>
-              <span className="font-heading font-bold text-xl text-white">
-                College<span className="text-cta">Wale</span>
-              </span>
-            </div>
+            <a href="/" className="inline-block mb-4">
+              <img
+                src="/logo.png"
+                alt="College Eduversity"
+                className="h-10 w-auto object-contain"
+              />
+            </a>
             <p className="text-sm leading-relaxed max-w-xs text-neutral-on-dark/90">
-              CollegeWale – India's Trusted College Discovery Platform. Helping students and parents make the right education choice.
+              India’s trusted college discovery platform. Helping students and parents make the right education choice.
             </p>
             <div className="mt-4 flex items-center gap-2 text-sm">
               <Mail className="w-4 h-4 text-cta shrink-0" />
@@ -40,44 +48,69 @@ export default function Footer() {
                 {SUPPORT_EMAIL}
               </a>
             </div>
-            <div className="flex gap-3 mt-4">
-              {['Facebook', 'Instagram', 'LinkedIn', 'YouTube'].map((label) => (
-                <a
-                  key={label}
-                  href="#"
-                  className="text-neutral-on-dark hover:text-cta transition-colors p-1.5 rounded-lg hover:bg-white/5"
-                  aria-label={label}
-                >
-                  <Share2 className="w-5 h-5" />
-                </a>
-              ))}
-            </div>
           </div>
 
-          {Object.entries(links).map(([heading, items]) => (
-            <div key={heading}>
-              <h4 className="font-heading font-bold text-white text-sm mb-4">
-                {heading}
-              </h4>
-              <ul className="space-y-2">
-                {items.map((item) => (
-                  <li key={item}>
-                    <a
-                      href="#"
-                      className="text-sm text-neutral-on-dark hover:text-cta transition-colors"
-                    >
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Explore — matches main sections */}
+          <div>
+            <h4 className="font-heading font-bold text-white text-sm mb-4">
+              Explore
+            </h4>
+            <ul className="space-y-2">
+              {exploreLinks.map(({ label, href }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    className="text-sm text-neutral-on-dark hover:text-cta transition-colors"
+                  >
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Courses — streams that link to college list */}
+          <div>
+            <h4 className="font-heading font-bold text-white text-sm mb-4">
+              Courses
+            </h4>
+            <ul className="space-y-2">
+              {courseLinks.map(({ label, href }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    className="text-sm text-neutral-on-dark hover:text-cta transition-colors"
+                  >
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h4 className="font-heading font-bold text-white text-sm mb-4">
+              Quick Links
+            </h4>
+            <ul className="space-y-2">
+              {quickLinks.map(({ label, href }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    className="text-sm text-neutral-on-dark hover:text-cta transition-colors"
+                  >
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        {/* Trust & legal */}
+        {/* Copyright & legal */}
         <div className="flex flex-col sm:flex-row flex-wrap justify-between items-center gap-4 pt-6 text-xs text-neutral-on-dark/70">
-          <span>© 2025 CollegeWale. All rights reserved.</span>
+          <span>© 2025 College Eduversity. All rights reserved.</span>
           <div className="flex flex-wrap justify-center gap-4">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-white transition-colors">Terms & Conditions</a>

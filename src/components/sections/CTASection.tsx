@@ -1,19 +1,53 @@
 import { useState } from 'react';
-import { Phone, Check, Star, GraduationCap, Award } from 'lucide-react';
+import { Phone, User, Mail, MessageSquare, BookOpen, Check, Star, GraduationCap, Award } from 'lucide-react';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
+import type { ApiCourse } from '../../types';
+import type { EnquiryPayload } from '../../types';
 
 interface CTASectionProps {
-  onSubmit: (phone: string) => void;
+  /** Courses from GET /api/courses for the course dropdown (value = _id, label = name). */
+  courses?: ApiCourse[];
+  /** Submit enquiry payload. Mobile required; name, email, description, courseId optional. */
+  onSubmit: (payload: EnquiryPayload) => void | Promise<void>;
 }
 
-export default function CTASection({ onSubmit }: CTASectionProps) {
-  const [phone, setPhone] = useState('');
+export default function CTASection({ courses = [], onSubmit }: CTASectionProps) {
+  const [mobile, setMobile] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [description, setDescription] = useState('');
+  const [courseId, setCourseId] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [fieldError, setFieldError] = useState<string | null>(null);
   const { ref, isVisible } = useScrollAnimation();
 
-  const handleSubmit = () => {
-    if (!phone || phone.length < 10) return;
-    onSubmit(phone);
-    setPhone('');
+  const handleSubmit = async () => {
+    const trimmed = mobile.replace(/\D/g, '').slice(0, 10);
+    if (trimmed.length < 10) {
+      setFieldError('Enter a valid 10-digit mobile number');
+      return;
+    }
+    setFieldError(null);
+    setSubmitting(true);
+    try {
+      const payload: EnquiryPayload = {
+        mobile: trimmed,
+        ...(name.trim() && { name: name.trim() }),
+        ...(email.trim() && { email: email.trim() }),
+        ...(description.trim() && { description: description.trim() }),
+        ...(courseId.trim() && { courseId: courseId.trim() }),
+      };
+      await onSubmit(payload);
+      setMobile('');
+      setName('');
+      setEmail('');
+      setDescription('');
+      setCourseId('');
+    } catch (e) {
+      setFieldError(e instanceof Error ? e.message : 'Something went wrong. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -40,24 +74,72 @@ export default function CTASection({ onSubmit }: CTASectionProps) {
           interests and scores.
         </p>
 
-        <div className="flex gap-3 max-w-md mx-auto">
-          <div className="flex-1 flex items-center border-2 border-neutral-border focus-within:border-cta rounded-lg bg-white overflow-hidden transition-colors px-3 gap-2">
+        <div className="space-y-3 max-w-md mx-auto text-left">
+          <div className="flex items-center border-2 border-neutral-border focus-within:border-cta rounded-lg bg-white overflow-hidden transition-colors px-3 gap-2">
             <Phone className="w-4 h-4 text-neutral-muted shrink-0" />
             <input
               type="tel"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
-              placeholder="Enter your mobile number"
+              value={mobile}
+              onChange={(e) => setMobile(e.target.value.replace(/\D/g, '').slice(0, 10))}
+              placeholder="Mobile number (required)"
               maxLength={10}
               className="flex-1 py-3 outline-none text-sm text-neutral-text placeholder-neutral-muted"
             />
           </div>
+          <div className="flex items-center border-2 border-neutral-border focus-within:border-cta rounded-lg bg-white overflow-hidden transition-colors px-3 gap-2">
+            <User className="w-4 h-4 text-neutral-muted shrink-0" />
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Name (optional)"
+              className="flex-1 py-3 outline-none text-sm text-neutral-text placeholder-neutral-muted"
+            />
+          </div>
+          <div className="flex items-center border-2 border-neutral-border focus-within:border-cta rounded-lg bg-white overflow-hidden transition-colors px-3 gap-2">
+            <Mail className="w-4 h-4 text-neutral-muted shrink-0" />
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email (optional)"
+              className="flex-1 py-3 outline-none text-sm text-neutral-text placeholder-neutral-muted"
+            />
+          </div>
+          {courses.length > 0 && (
+            <div className="flex items-center border-2 border-neutral-border focus-within:border-cta rounded-lg bg-white overflow-hidden transition-colors px-3 gap-2">
+              <BookOpen className="w-4 h-4 text-neutral-muted shrink-0" />
+              <select
+                value={courseId}
+                onChange={(e) => setCourseId(e.target.value)}
+                className="flex-1 py-3 outline-none text-sm text-neutral-text bg-transparent w-full"
+              >
+                <option value="">Course of interest (optional)</option>
+                {courses.map((c) => (
+                  <option key={c._id} value={c._id}>{c.name}</option>
+                ))}
+              </select>
+            </div>
+          )}
+          <div className="flex items-start border-2 border-neutral-border focus-within:border-cta rounded-lg bg-white overflow-hidden transition-colors px-3 gap-2 pt-2">
+            <MessageSquare className="w-4 h-4 text-neutral-muted shrink-0 mt-3" />
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Your message (optional)"
+              rows={3}
+              className="flex-1 py-2 outline-none text-sm text-neutral-text placeholder-neutral-muted resize-none"
+            />
+          </div>
+          {fieldError && (
+            <p className="text-sm text-red-600">{fieldError}</p>
+          )}
           <button
             onClick={handleSubmit}
-            className="bg-cta hover:bg-cta-hover text-white py-3 px-5 rounded-btn font-bold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-cta/30 whitespace-nowrap"
+            disabled={submitting}
+            className="w-full bg-cta hover:bg-cta-hover disabled:opacity-60 text-white py-3 px-5 rounded-btn font-bold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-cta/30"
           >
-            Get Expert Guidance
+            {submitting ? 'Submitting…' : 'Get Expert Guidance'}
           </button>
         </div>
 

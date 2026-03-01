@@ -25,8 +25,6 @@ const COURSE_OPTIONS: { value: CourseCategory; label: string }[] = [
   { value: 'MCA', label: 'MCA / BCA' },
 ];
 
-const POPULAR = ['B.Tech', 'MBA', 'MBBS', 'Law', 'Design', 'Data Science', 'Pharmacy'];
-
 export default function SearchSection({
   query,
   onQueryChange,
@@ -42,11 +40,11 @@ export default function SearchSection({
     <section className="bg-white shadow-sm border-b border-neutral-border py-10 px-4 sm:px-6">
       <div className="max-w-4xl mx-auto">
         <p className="font-heading font-semibold text-center text-neutral-text text-lg mb-5">
-          Search from 5,000+ verified colleges across India
+          Search verified colleges across India
         </p>
 
-        <div className="flex flex-wrap rounded-xl overflow-hidden shadow-md border-2 border-neutral-border focus-within:border-cta transition-colors">
-          <div className="flex flex-1 min-w-0 flex items-center px-4 bg-neutral-bg border-r border-neutral-border">
+        <div className="flex flex-col sm:flex-row rounded-xl overflow-hidden shadow-md border-2 border-neutral-border focus-within:border-cta transition-colors">
+          <div className="flex flex-1 min-w-0 flex items-center px-4 py-3 sm:py-4 bg-neutral-bg border-b sm:border-b-0 sm:border-r border-neutral-border">
             <Search className="w-5 h-5 text-neutral-muted shrink-0" />
             <input
               type="text"
@@ -54,14 +52,14 @@ export default function SearchSection({
               onChange={(e) => onQueryChange(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && onSearch()}
               placeholder="Search college, course, city..."
-              className="flex-1 min-w-0 px-3 py-4 text-base outline-none bg-transparent text-neutral-text placeholder-neutral-muted"
+              className="flex-1 min-w-0 px-3 py-2 sm:py-0 text-base outline-none bg-transparent text-neutral-text placeholder-neutral-muted"
             />
           </div>
           {showCourseDropdown ? (
             <select
               value={selectedCourseId ?? ''}
               onChange={(e) => onCourseChange(e.target.value ? e.target.value : null)}
-              className="sm:min-w-[160px] px-4 py-4 bg-white border-l border-neutral-border text-neutral-muted text-sm outline-none cursor-pointer"
+              className="w-full sm:w-auto sm:min-w-[160px] px-4 py-3 sm:py-4 bg-white border-b sm:border-b-0 sm:border-l border-neutral-border text-neutral-muted text-sm outline-none cursor-pointer"
             >
               <option value="">All courses</option>
               {courses.map((c) => (
@@ -73,7 +71,7 @@ export default function SearchSection({
           ) : (
             <select
               onChange={(e) => onCategoryChange(e.target.value as CourseCategory)}
-              className="hidden sm:block px-4 py-4 bg-white border-l border-neutral-border text-neutral-muted text-sm outline-none cursor-pointer min-w-[180px]"
+              className="w-full sm:w-auto sm:min-w-[180px] px-4 py-3 sm:py-4 bg-white border-b sm:border-b-0 sm:border-l border-neutral-border text-neutral-muted text-sm outline-none cursor-pointer"
             >
               {COURSE_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value}>
@@ -84,26 +82,10 @@ export default function SearchSection({
           )}
           <button
             onClick={onSearch}
-            className="bg-cta hover:bg-cta-hover text-white py-3 px-6 text-sm font-bold transition-colors whitespace-nowrap"
+            className="w-full sm:w-auto bg-cta hover:bg-cta-hover text-white py-3 px-6 text-sm font-bold transition-colors whitespace-nowrap shrink-0"
           >
             Search →
           </button>
-        </div>
-
-        <div className="flex items-center gap-2 mt-4 flex-wrap">
-          <span className="text-sm text-neutral-muted font-medium">Popular:</span>
-          {POPULAR.map((term) => (
-            <button
-              key={term}
-              onClick={() => {
-                onQueryChange(term);
-                onSearch();
-              }}
-              className="bg-neutral-bg hover:bg-cta hover:text-white text-neutral-text py-1.5 px-3.5 rounded-full text-xs font-semibold transition-all"
-            >
-              {term}
-            </button>
-          ))}
         </div>
       </div>
     </section>

@@ -71,8 +71,18 @@ export interface FilterState {
   category: CourseCategory;
   state: string;
   searchQuery: string;
-  /** Course ID from GET /api/courses (24-char hex). Filter colleges by this course. */
+  /** Course ID from GET /api/courses (24-char hex). Filter colleges by this course (used when selecting course or stream). */
   courseId?: string | null;
+}
+
+/** Stream from GET /api/streams/popular or GET /api/streams (Browse by Stream) */
+export interface ApiStream {
+  id: string;
+  name: string;
+  slug: string;
+  collegeCount: number;
+  iconUrl: string | null;
+  iconKey: string | null;
 }
 
 /** Course from GET /api/courses (for dropdown; use _id as courseId when filtering colleges) */
@@ -80,6 +90,31 @@ export interface ApiCourse {
   _id: string;
   name: string;
   slug: string;
+}
+
+/** Event list item from GET /api/events (running + upcoming) */
+export interface ApiEvent {
+  id: string;
+  name: string;
+  startDate: string;
+  endDate: string;
+  shortDescription: string | null;
+  imageUrl: string | null;
+  venue: string | null;
+  status: 'running' | 'upcoming';
+}
+
+/** Event detail from GET /api/events/:id */
+export interface ApiEventDetail extends ApiEvent {
+  longDescription: string | null;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+/** Paginated events list response */
+export interface EventsListResponse {
+  events: ApiEvent[];
+  pagination: Pagination;
 }
 
 // ---------- API / Backend types ----------
@@ -93,6 +128,8 @@ export interface CourseFee {
 /** Full college details (from GET /api/colleges/:slug) */
 export interface CollegeDetail extends College {
   slug?: string;
+  /** NIRF rank when available */
+  nirfRank?: number | null;
   feeAmount?: number;
   feePeriod?: string;
   /** Fees per course – show when API provides them */
@@ -136,12 +173,29 @@ export interface CollegesListResponse {
   pagination: Pagination;
 }
 
-/** Payload for POST /api/counselling-enquiry */
-export interface CounsellingEnquiryPayload {
-  name: string;
-  email: string;
-  phone: string;
-  courseInterest?: string;
-  currentStatus?: string;
-  message?: string;
+/** Payload for POST /api/enquiries (Consumer Enquiry API). Mobile is required; rest optional. */
+export interface EnquiryPayload {
+  mobile: string;
+  name?: string;
+  email?: string;
+  description?: string;
+  courseId?: string;
+}
+
+/** Validation error from enquiry API (400). */
+export interface EnquiryValidationError {
+  field: string;
+  message: string;
+}
+
+/** Success response data from POST /api/enquiries (201). */
+export interface EnquiryResponseData {
+  id: string;
+  mobile: string;
+  name?: string;
+  email?: string;
+  description?: string;
+  courseId?: string;
+  status: string;
+  createdAt: string;
 }

@@ -52,7 +52,9 @@ export default {
         'float': 'float 6s ease-in-out infinite',
         'float-slow': 'float 8s ease-in-out infinite reverse',
         'fade-up': 'fadeUp 0.6s ease both',
+        'fade-in': 'fadeIn 0.4s ease both',
         'pulse-dot': 'pulseDot 2s infinite',
+        'marquee': 'marquee 40s linear infinite',
       },
       keyframes: {
         float: {
@@ -62,6 +64,14 @@ export default {
         fadeUp: {
           from: { opacity: '0', transform: 'translateY(24px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
+        },
+        fadeIn: {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
         pulseDot: {
           '0%, 100%': { opacity: '1', transform: 'scale(1)' },

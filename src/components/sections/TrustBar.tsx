@@ -1,9 +1,9 @@
 import { Star, Building2, GraduationCap, Briefcase } from 'lucide-react';
 
 const ITEMS = [
-  { Icon: Star, text: 'Rated 4.8/5 by Students' },
-  { Icon: Building2, text: '5,000+ Verified Colleges' },
-  { Icon: GraduationCap, text: '2L+ Students Helped' },
+  { Icon: Star, text: 'Rated by Students' },
+  { Icon: Building2, text: 'Verified Colleges' },
+  { Icon: GraduationCap, text: 'Students Helped' },
   { Icon: Briefcase, text: 'Real Placement Data' },
 ];
 

@@ -31,7 +31,7 @@ export default function WhySection() {
       >
         <div>
           <p className="text-xs font-bold uppercase tracking-[3px] text-neutral-on-dark mb-2">
-            Why CollegeWale?
+            Why College Eduversity?
           </p>
           <h2 className="font-heading font-semibold text-h2 text-white leading-tight mb-4">
             India's Most Trusted{' '}

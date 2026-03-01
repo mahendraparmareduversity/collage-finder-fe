@@ -12,13 +12,6 @@ const TRUST_POINTS = [
   'Verified College Data',
 ];
 
-const STATS = [
-  { value: '5,000+', label: 'Verified Colleges' },
-  { value: '2,00,000+', label: 'Students Guided' },
-  { value: '50+', label: 'Courses' },
-  { value: '28+', label: 'States Covered' },
-];
-
 export default function HeroSection({
   onExploreClick,
   onCounsellingClick,
@@ -46,9 +39,9 @@ export default function HeroSection({
           </h1>
 
           <p className="text-neutral-on-dark text-lg leading-relaxed mb-6 max-w-lg">
-            Compare 5,000+ verified colleges, real placement data, and get free expert guidance.
+            Compare verified colleges, real placement data, and get free expert guidance.
             <br />
-            <span className="text-white font-medium">Trusted by 2,00,000+ students across India.</span>
+            <span className="text-white font-medium">Trusted by students across India.</span>
           </p>
 
           <div className="flex gap-3 flex-wrap mb-6">
@@ -68,18 +61,6 @@ export default function HeroSection({
               </span>
             ))}
           </p>
-
-          {/* Trust Stats row */}
-          <div className="flex gap-8 mt-10 flex-wrap">
-            {STATS.map((s) => (
-              <div key={s.label}>
-                <p className="font-heading font-bold text-2xl text-white leading-none">
-                  {s.value}
-                </p>
-                <p className="text-neutral-on-dark text-[13px] mt-1">{s.label}</p>
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* RIGHT — floating cards (social proof) */}
@@ -93,12 +74,12 @@ export default function HeroSection({
                 <GraduationCap className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className="font-heading font-bold text-white text-base">IIT Bombay</p>
-                <p className="text-neutral-on-dark text-xs">Mumbai · NIRF #1</p>
+                <p className="font-heading font-bold text-white text-base">Top Colleges</p>
+                <p className="text-neutral-on-dark text-xs">Multiple streams · Verified data</p>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-2 mb-4">
-              {['B.Tech CSE', 'M.Tech AI/ML', 'MBA (SJMSOM)', 'Ph.D'].map((c) => (
+              {['B.Tech CSE', 'M.Tech AI/ML', 'MBA', 'Ph.D'].map((c) => (
                 <div
                   key={c}
                   className="rounded-lg px-3 py-2 text-neutral-on-dark text-xs flex items-center gap-1.5"
@@ -109,7 +90,7 @@ export default function HeroSection({
               ))}
             </div>
             <div className="flex gap-2 flex-wrap">
-              {['NIRF #1', 'JEE Advanced', '₹2.5L/yr'].map((tag) => (
+              {['Rankings', 'Eligibility', 'Placements'].map((tag) => (
                 <span
                   key={tag}
                   className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-primary/20 border border-primary/30 text-neutral-on-dark"
@@ -120,17 +101,16 @@ export default function HeroSection({
             </div>
           </div>
 
-          {/* Placement card */}
+          {/* College info card */}
           <div
-            className="animate-float-slow absolute -top-5 -right-8 rounded-xl p-4 w-40 shadow-card"
+            className="animate-float-slow absolute -top-5 -right-8 rounded-xl p-4 w-44 shadow-card"
             style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.1)' }}
           >
-            <p className="font-heading font-bold text-white text-2xl">98%</p>
-            <p className="text-neutral-on-dark text-[11px]">Placement Rate</p>
-            <p className="text-success text-[11px] mt-1.5 font-semibold">Avg. ₹18 LPA</p>
+            <p className="font-heading font-bold text-white text-base">Placement support</p>
+            <p className="text-neutral-on-dark text-[11px] mt-0.5">Real placement data for verified colleges</p>
           </div>
 
-          {/* Verified Admit card */}
+          {/* Verified colleges card */}
           <div
             className="absolute -bottom-4 -left-6 rounded-xl p-4 w-48 shadow-card"
             style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.1)' }}
@@ -139,12 +119,12 @@ export default function HeroSection({
               className="text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full text-white"
               style={{ background: '#16A34A' }}
             >
-              Verified Admit
+              Verified
             </span>
             <p className="text-white text-sm font-semibold mt-2">
-              Rahul Sharma – VIT CSE
+              College profiles & courses
             </p>
-            <p className="text-neutral-on-dark text-[11px] mt-0.5">JEE Rank: 18,234</p>
+            <p className="text-neutral-on-dark text-[11px] mt-0.5">Eligibility, fees & placements</p>
           </div>
         </div>
       </div>

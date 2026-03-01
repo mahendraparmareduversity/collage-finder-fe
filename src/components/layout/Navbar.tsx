@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, X, GraduationCap } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 interface NavbarProps {
   onCounsellingClick: () => void;
@@ -8,8 +8,7 @@ interface NavbarProps {
 const NAV_LINKS = [
   { label: 'Courses', href: '#courses' },
   { label: 'Top Colleges', href: '#colleges' },
-  { label: 'MBA', href: '#colleges' },
-  { label: 'Engineering', href: '#colleges' },
+  { label: 'Events', href: '#events' },
 ];
 
 export default function Navbar({ onCounsellingClick }: NavbarProps) {
@@ -17,29 +16,16 @@ export default function Navbar({ onCounsellingClick }: NavbarProps) {
 
   return (
     <>
-      {/* Top announcement bar — brand orange, white text */}
-      <div className="bg-cta text-white text-center text-xs sm:text-sm py-2 px-4 font-medium">
-        Admissions 2025–26 Open | Free Career Counselling Available —{' '}
-        <button
-          onClick={onCounsellingClick}
-          className="underline font-bold hover:no-underline"
-        >
-          Book Now →
-        </button>
-      </div>
-
-      {/* Main Navbar — brand dark blue */}
       <nav
-        className="sticky top-0 z-50 border-b border-white/10 backdrop-blur-md bg-navy/95"
+        className="sticky top-0 z-50 border-b border-neutral-border bg-neutral-200"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-          <a href="#" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-cta rounded-btn flex items-center justify-center">
-              <GraduationCap className="w-5 h-5 text-white" />
-            </div>
-            <span className="font-heading font-bold text-xl text-white">
-              College<span className="text-cta">Wale</span>
-            </span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16 sm:h-20">
+          <a href="/" className="flex items-center shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-cta focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-200 rounded py-1">
+            <img
+              src="/logo.png"
+              alt="College Eduversity"
+              className="h-[3.25rem] sm:h-[4.5rem] w-auto object-contain"
+            />
           </a>
 
           <ul className="hidden md:flex items-center gap-6">
@@ -47,7 +33,7 @@ export default function Navbar({ onCounsellingClick }: NavbarProps) {
               <li key={link.label}>
                 <a
                   href={link.href}
-                  className="text-neutral-on-dark hover:text-white text-sm font-medium transition-colors"
+                  className="text-neutral-text hover:text-cta text-sm font-medium transition-colors"
                 >
                   {link.label}
                 </a>
@@ -64,7 +50,7 @@ export default function Navbar({ onCounsellingClick }: NavbarProps) {
             </button>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden text-white p-1"
+              className="md:hidden text-neutral-text p-1 hover:text-cta"
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X size={22} /> : <Menu size={22} />}
@@ -73,14 +59,14 @@ export default function Navbar({ onCounsellingClick }: NavbarProps) {
         </div>
 
         {mobileOpen && (
-          <div className="md:hidden border-t border-white/10 px-4 pb-4 bg-navy">
+          <div className="md:hidden border-t border-neutral-border px-4 pb-4 bg-neutral-200">
             <ul className="flex flex-col gap-1 pt-2">
               {NAV_LINKS.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="block py-2 text-neutral-on-dark hover:text-white text-sm font-medium transition-colors"
+                    className="block py-2 text-neutral-text hover:text-cta text-sm font-medium transition-colors"
                   >
                     {link.label}
                   </a>

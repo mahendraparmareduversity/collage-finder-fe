@@ -1,4 +1,4 @@
-# 🎓 CollegeWale — India's College Discovery Platform
+# 🎓 College Eduversity — India's College Discovery Platform
 
 > Find your dream college in India. Built with **Vite + React + TypeScript + Tailwind CSS**
 
@@ -108,4 +108,4 @@ npm run preview
 
 ## 📄 License
 
-MIT © CollegeWale 2025
+MIT © College Eduversity 2025
