@@ -8,11 +8,21 @@ const FEATURES = [
   { Icon: BarChart3, title: 'College Comparisons', desc: 'Compare colleges side-by-side on fees, placements, campus & more' },
 ];
 
-const STATS = [
-  { num: '2', suffix: 'L+', label: 'Students Successfully Placed', wide: true },
-  { num: '5', suffix: 'K+', label: 'Colleges Across India', wide: false },
-  { num: '50', suffix: '+', label: 'Courses Covered', wide: false },
-  { num: '28', suffix: '+', label: 'States & UTs', wide: false },
+const BUSINESS_EMAIL = 'eduversitycollege@gmail.com';
+
+type StatItem = {
+  title: string;
+  desc?: string;
+  wide: boolean;
+  isEmail?: boolean;
+  email?: string;
+};
+
+const STATS: StatItem[] = [
+  { title: 'Students Successfully Placed', desc: 'Through our partner colleges and expert counselling', wide: true },
+  { title: 'Colleges Across India', desc: 'Verified listings nationwide', wide: false },
+  { title: 'Courses Covered', desc: 'Multiple streams and programmes', wide: false },
+  { title: 'Contact', email: BUSINESS_EMAIL, wide: false, isEmail: true },
 ];
 
 export default function WhySection() {
@@ -70,24 +80,36 @@ export default function WhySection() {
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          {STATS.map((s) => (
-            <div
-              key={s.label}
-              className={`rounded-2xl p-6 text-center transition-all border border-white/10 ${
-                s.wide ? 'col-span-2' : ''
-              }`}
-              style={{
-                background: s.wide ? 'rgba(249,115,22,0.12)' : 'rgba(255,255,255,0.06)',
-                borderColor: s.wide ? 'rgba(249,115,22,0.3)' : undefined,
-              }}
-            >
-              <p className="font-heading font-bold text-4xl text-white leading-none">
-                {s.num}
-                <span className="text-cta">{s.suffix}</span>
-              </p>
-              <p className="text-neutral-on-dark/80 text-sm mt-2">{s.label}</p>
-            </div>
-          ))}
+          {STATS.map((s) => {
+            const cardClass = `rounded-2xl p-6 text-center transition-all border border-white/10 ${
+              s.wide ? 'col-span-2' : ''
+            } ${s.isEmail ? 'hover:border-cta/50' : ''}`;
+            const cardStyle = {
+              background: s.wide ? 'rgba(249,115,22,0.12)' : 'rgba(255,255,255,0.06)',
+              borderColor: s.wide ? 'rgba(249,115,22,0.3)' : undefined,
+            };
+            const content = s.isEmail ? (
+              <>
+                <p className="font-heading font-bold text-xl text-white leading-none">{s.title}</p>
+                <p className="text-neutral-on-dark/80 text-xs break-all mt-2">{s.email}</p>
+              </>
+            ) : (
+              <>
+                <p className="font-heading font-bold text-xl text-white leading-tight">{s.title}</p>
+                {s.desc && <p className="text-neutral-on-dark/80 text-sm mt-2">{s.desc}</p>}
+              </>
+            );
+            const key = s.title + (s.email ?? '');
+            return s.isEmail && s.email ? (
+              <a key={key} href={`mailto:${s.email}`} className={cardClass} style={cardStyle}>
+                {content}
+              </a>
+            ) : (
+              <div key={key} className={cardClass} style={cardStyle}>
+                {content}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

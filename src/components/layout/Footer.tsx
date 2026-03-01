@@ -1,6 +1,6 @@
 import { Mail } from 'lucide-react';
 
-const SUPPORT_EMAIL = 'support@collegewale.in';
+const SUPPORT_EMAIL = 'eduversitycollege@gmail.com';
 
 export default function Footer() {
   const exploreLinks = [

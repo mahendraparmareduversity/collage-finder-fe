@@ -6,9 +6,9 @@ interface NavbarProps {
 }
 
 const NAV_LINKS = [
-  { label: 'Courses', href: '#courses' },
-  { label: 'Top Colleges', href: '#colleges' },
-  { label: 'Events', href: '#events' },
+  { label: 'Courses', href: '/#courses' },
+  { label: 'Top Colleges', href: '/#colleges' },
+  { label: 'Events', href: '/#events' },
 ];
 
 export default function Navbar({ onCounsellingClick }: NavbarProps) {

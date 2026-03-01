@@ -7,7 +7,6 @@ import SearchSection from './components/sections/SearchSection';
 import CollegesSection from './components/sections/CollegesSection';
 import EventsSection from './components/sections/EventsSection';
 import CoursesSection from './components/sections/CoursesSection';
-import StudentReviewsSection from './components/sections/StudentReviewsSection';
 import WhySection from './components/sections/WhySection';
 import CTASection from './components/sections/CTASection';
 import FAQSection from './components/sections/FAQSection';
@@ -171,8 +170,6 @@ export default function App() {
           onStreamSelect={handleStreamSelect}
           onCourseSelect={handleCourseSelect}
         />
-
-        <StudentReviewsSection />
 
         <WhySection />
 
