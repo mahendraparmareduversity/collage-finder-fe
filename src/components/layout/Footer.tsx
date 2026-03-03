@@ -22,28 +22,28 @@ const INSTAGRAM_URL = 'https://www.instagram.com/college_eduversity?igsh=MW5wbGY
 
 export default function Footer() {
   const exploreLinks = [
-    { label: 'Top Colleges', href: '#colleges' },
-    { label: 'Explore Courses', href: '#courses' },
-    { label: 'Latest Updates', href: '#events' },
-    { label: 'Study Abroad', href: '/study-abroad', isRoute: true },
-    { label: 'Free Counselling', href: '#cta' },
-    { label: 'FAQ', href: '#faq' },
-    { label: 'About Us', href: '/about', isRoute: true },
+    { label: 'Top Colleges', to: '/#colleges' },
+    { label: 'Explore Courses', to: '/#courses' },
+    { label: 'Latest Updates', to: '/#events' },
+    { label: 'Study Abroad', to: '/study-abroad' },
+    { label: 'Free Counselling', to: '/#cta' },
+    { label: 'FAQ', to: '/#faq' },
+    { label: 'About Us', to: '/about' },
   ];
 
   const courseLinks = [
-    { label: 'B.Tech / Engineering', href: '#colleges' },
-    { label: 'MBA / PGDM', href: '#colleges' },
-    { label: 'MBBS / Medical', href: '#colleges' },
-    { label: 'Law (LLB)', href: '#colleges' },
-    { label: 'B.Com / M.Com', href: '#colleges' },
-    { label: 'BCA / MCA', href: '#colleges' },
-    { label: 'B.Design', href: '#colleges' },
+    { label: 'B.Tech / Engineering', to: '/#colleges' },
+    { label: 'MBA / PGDM', to: '/#colleges' },
+    { label: 'MBBS / Medical', to: '/#colleges' },
+    { label: 'Law (LLB)', to: '/#colleges' },
+    { label: 'B.Com / M.Com', to: '/#colleges' },
+    { label: 'BCA / MCA', to: '/#colleges' },
+    { label: 'B.Design', to: '/#colleges' },
   ];
 
   const quickLinks = [
-    { label: 'Compare Colleges', href: '#colleges' },
-    { label: 'Contact Us', href: '#cta' },
+    { label: 'Compare Colleges', to: '/#colleges' },
+    { label: 'Contact Us', to: '/#cta' },
   ];
 
   return (
@@ -52,13 +52,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-10 border-b border-primary/20">
           {/* Brand & Contact */}
           <div>
-            <a href="/" className="inline-block mb-4">
+            <Link to="/" className="inline-block mb-4" aria-label="College Eduversity home">
               <img
                 src="/logo.png"
                 alt="College Eduversity"
                 className="h-10 w-auto object-contain"
               />
-            </a>
+            </Link>
             <p className="text-sm leading-relaxed max-w-xs text-neutral-on-dark/90">
               India’s trusted college discovery platform. Helping students and parents make the right education choice.
             </p>
@@ -102,27 +102,16 @@ export default function Footer() {
               Explore
             </h4>
             <ul className="space-y-2">
-              {exploreLinks.map((link) =>
-                link.isRoute ? (
-                  <li key={link.label}>
-                    <Link
-                      to={link.href}
-                      className="text-sm text-neutral-on-dark hover:text-cta transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ) : (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="text-sm text-neutral-on-dark hover:text-cta transition-colors"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                )
-              )}
+              {exploreLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    to={link.to}
+                    className="text-sm text-neutral-on-dark hover:text-cta transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -132,14 +121,14 @@ export default function Footer() {
               Courses
             </h4>
             <ul className="space-y-2">
-              {courseLinks.map(({ label, href }) => (
+              {courseLinks.map(({ label, to }) => (
                 <li key={label}>
-                  <a
-                    href={href}
+                  <Link
+                    to={to}
                     className="text-sm text-neutral-on-dark hover:text-cta transition-colors"
                   >
                     {label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -151,14 +140,14 @@ export default function Footer() {
               Quick Links
             </h4>
             <ul className="space-y-2">
-              {quickLinks.map(({ label, href }) => (
+              {quickLinks.map(({ label, to }) => (
                 <li key={label}>
-                  <a
-                    href={href}
+                  <Link
+                    to={to}
                     className="text-sm text-neutral-on-dark hover:text-cta transition-colors"
                   >
                     {label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -169,6 +158,7 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row flex-wrap justify-between items-center gap-4 pt-6 text-xs text-neutral-on-dark/70">
           <span>© 2025 College Eduversity. All rights reserved.</span>
           <div className="flex flex-wrap justify-center gap-4">
+            <Link to="/about" className="hover:text-white transition-colors">About Us</Link>
             <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-white transition-colors">Terms & Conditions</Link>
           </div>
