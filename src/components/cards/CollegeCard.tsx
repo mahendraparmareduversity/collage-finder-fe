@@ -1,6 +1,8 @@
 import { MapPin, Building2 } from 'lucide-react';
 import { College } from '../../types';
 import Badge from '../ui/Badge';
+import WhatsAppIcon from '../ui/WhatsAppIcon';
+import { getCollegeShareUrl } from '../../utils/whatsapp';
 
 function isValidImageUrl(url: string | undefined | null): boolean {
   if (!url || !url.trim()) return false;
@@ -90,15 +92,27 @@ export default function CollegeCard({
             <p className="text-[10px] text-neutral-muted uppercase tracking-wide">Fees</p>
             <p className="text-sm font-bold text-neutral-text">{formatFee(college.fee)}</p>
           </div>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onApply(college.name);
-            }}
-            className="bg-cta hover:bg-cta-hover text-white py-2 px-4 rounded-btn text-xs font-bold transition-all hover:shadow-card-cta shrink-0"
-          >
-            Apply Now
-          </button>
+          <div className="flex items-center gap-2 shrink-0">
+            <a
+              href={getCollegeShareUrl(college)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="flex items-center justify-center w-9 h-9 rounded-full bg-[#25D366] hover:bg-[#20BD5A] text-white transition-colors"
+              aria-label="Share via WhatsApp"
+            >
+              <WhatsAppIcon className="w-5 h-5" />
+            </a>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onApply(college.name);
+              }}
+              className="bg-cta hover:bg-cta-hover text-white py-2 px-4 rounded-btn text-xs font-bold transition-all hover:shadow-card-cta"
+            >
+              Apply Now
+            </button>
+          </div>
         </div>
       </div>
     </div>

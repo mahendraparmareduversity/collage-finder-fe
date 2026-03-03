@@ -144,8 +144,8 @@ export default function CollegesSection({
                 onClick={() => onStateChange(filterValue)}
                 className={`px-4 py-1.5 rounded-full border text-xs font-semibold transition-all ${
                   filters.state === filterValue
-                    ? 'border-cta text-cta bg-cta/5'
-                    : 'border-neutral-border text-neutral-muted hover:border-cta hover:text-cta'
+                    ? 'bg-primary border-primary text-white hover:bg-primary hover:text-white'
+                    : 'border-neutral-border text-neutral-muted hover:border-primary hover:text-primary'
                 }`}
               >
                 {displayState}

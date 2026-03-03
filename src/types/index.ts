@@ -92,13 +92,14 @@ export interface ApiCourse {
   slug: string;
 }
 
-/** Event list item from GET /api/events (running + upcoming) */
+/** Event list item from GET /api/events (running + upcoming). May include longDescription when API returns it. */
 export interface ApiEvent {
   id: string;
   name: string;
   startDate: string;
   endDate: string;
   shortDescription: string | null;
+  longDescription?: string | null;
   imageUrl: string | null;
   venue: string | null;
   status: 'running' | 'upcoming';

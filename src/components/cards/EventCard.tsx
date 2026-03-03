@@ -1,5 +1,7 @@
 import { Calendar, MapPin } from 'lucide-react';
 import type { ApiEvent } from '../../types';
+import WhatsAppIcon from '../ui/WhatsAppIcon';
+import { getEventShareUrl } from '../../utils/whatsapp';
 
 const CARD_GRADIENTS = [
   'linear-gradient(165deg, #E0E8F5 0%, #D0DAEB 40%, #E2E8F0 100%)',
@@ -78,8 +80,13 @@ export default function EventCard({ event, onView }: EventCardProps) {
           {event.name}
         </h3>
         {event.shortDescription && (
-          <p className="text-neutral-muted text-sm line-clamp-2 mb-2">
+          <p className="text-neutral-muted text-sm line-clamp-1 mb-1">
             {event.shortDescription}
+          </p>
+        )}
+        {event.longDescription?.trim() && (
+          <p className="text-neutral-muted text-xs line-clamp-2 mb-2 leading-relaxed">
+            {event.longDescription.replace(/\s+/g, ' ').trim()}
           </p>
         )}
         {dateStr && (
@@ -94,6 +101,18 @@ export default function EventCard({ event, onView }: EventCardProps) {
             <span className="truncate">{event.venue}</span>
           </div>
         )}
+        <div className="mt-3 flex justify-end">
+          <a
+            href={getEventShareUrl(event)}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="flex items-center justify-center w-9 h-9 rounded-full bg-[#25D366] hover:bg-[#20BD5A] text-white transition-colors"
+            aria-label="Share via WhatsApp"
+          >
+            <WhatsAppIcon className="w-5 h-5" />
+          </a>
+        </div>
       </div>
     </div>
   );

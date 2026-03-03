@@ -22,22 +22,22 @@ export default function Navbar({ onCounsellingClick }: NavbarProps) {
       <nav
         className="sticky top-0 z-50 border-b border-primary/15 bg-surface shadow-sm"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16 sm:h-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-20 sm:h-[5.25rem]">
           <a href="/" className="flex items-center shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-cta focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-200 rounded py-1">
             <img
               src="/logo.png"
               alt="College Eduversity"
-              className="h-[3.25rem] sm:h-[4.5rem] w-auto object-contain"
+              className="h-[4rem] sm:h-[5.625rem] w-auto object-contain"
             />
           </a>
 
-          <ul className="hidden md:flex items-center gap-6">
+          <ul className="hidden md:flex items-center gap-8">
             {NAV_LINKS.map((link) =>
               link.isRoute ? (
                 <li key={link.label}>
                   <Link
                     to={link.href}
-                    className="text-neutral-text hover:text-cta text-sm font-medium transition-colors"
+                    className="text-neutral-text hover:text-cta text-base font-medium transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -46,7 +46,7 @@ export default function Navbar({ onCounsellingClick }: NavbarProps) {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-neutral-text hover:text-cta text-sm font-medium transition-colors"
+                    className="text-neutral-text hover:text-cta text-base font-medium transition-colors"
                   >
                     {link.label}
                   </a>
@@ -55,19 +55,19 @@ export default function Navbar({ onCounsellingClick }: NavbarProps) {
             )}
           </ul>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <button
               onClick={onCounsellingClick}
-              className="hidden sm:block bg-cta hover:bg-cta-hover text-white py-3 px-5 rounded-btn text-sm font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-cta/30"
+              className="hidden sm:block bg-cta hover:bg-cta-hover text-white py-3.5 px-6 rounded-btn text-base font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-cta/30"
             >
               Free Counselling
             </button>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden text-neutral-text p-1 hover:text-cta"
+              className="md:hidden text-neutral-text p-1.5 hover:text-cta"
               aria-label="Toggle menu"
             >
-              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+              {mobileOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
@@ -81,7 +81,7 @@ export default function Navbar({ onCounsellingClick }: NavbarProps) {
                     <Link
                       to={link.href}
                       onClick={() => setMobileOpen(false)}
-                      className="block py-2 text-neutral-text hover:text-cta text-sm font-medium transition-colors"
+                      className="block py-2.5 text-neutral-text hover:text-cta text-base font-medium transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -91,7 +91,7 @@ export default function Navbar({ onCounsellingClick }: NavbarProps) {
                     <a
                       href={link.href}
                       onClick={() => setMobileOpen(false)}
-                      className="block py-2 text-neutral-text hover:text-cta text-sm font-medium transition-colors"
+                      className="block py-2.5 text-neutral-text hover:text-cta text-base font-medium transition-colors"
                     >
                       {link.label}
                     </a>
@@ -104,7 +104,7 @@ export default function Navbar({ onCounsellingClick }: NavbarProps) {
                     setMobileOpen(false);
                     onCounsellingClick();
                   }}
-                  className="w-full bg-cta text-white py-3 rounded-btn text-sm font-semibold"
+                  className="w-full bg-cta text-white py-3.5 rounded-btn text-base font-semibold"
                 >
                   Free Counselling
                 </button>

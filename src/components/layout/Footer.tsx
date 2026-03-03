@@ -50,13 +50,13 @@ export default function Footer() {
     <footer className="text-neutral-on-dark bg-navy">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-10 border-b border-primary/20">
-          {/* Brand & Contact */}
-          <div>
+          {/* Brand & Contact — left-aligned, icon and text aligned */}
+          <div className="text-left">
             <Link to="/" className="inline-block mb-4" aria-label="College Eduversity home">
               <img
-                src="/logo.png"
+                src="/logo2.png"
                 alt="College Eduversity"
-                className="h-10 w-auto object-contain"
+                className="h-14 w-auto object-contain"
               />
             </Link>
             <p className="text-sm leading-relaxed max-w-xs text-neutral-on-dark/90">
@@ -65,24 +65,26 @@ export default function Footer() {
             <div className="mt-4 space-y-3 text-sm text-neutral-on-dark/90">
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-cta shrink-0 mt-0.5" />
-                <span className="leading-relaxed">{ADDRESS}</span>
+                <span className="min-w-0 leading-relaxed break-words">{ADDRESS}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-cta shrink-0" />
-                <a href={`mailto:${SUPPORT_EMAIL}`} className="hover:text-white transition-colors">
+              <div className="flex items-start gap-2">
+                <Mail className="w-4 h-4 text-cta shrink-0 mt-0.5" />
+                <a href={`mailto:${SUPPORT_EMAIL}`} className="hover:text-white transition-colors break-all">
                   {SUPPORT_EMAIL}
                 </a>
               </div>
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-                <Phone className="w-4 h-4 text-cta shrink-0" />
-                {MOBILE.map((num) => (
-                  <a key={num} href={`tel:${num}`} className="hover:text-white transition-colors">
-                    {num}
-                  </a>
-                ))}
+              <div className="flex items-start gap-2">
+                <Phone className="w-4 h-4 text-cta shrink-0 mt-0.5" />
+                <span className="min-w-0 flex flex-wrap gap-x-4 gap-y-1">
+                  {MOBILE.map((num) => (
+                    <a key={num} href={`tel:${num}`} className="hover:text-white transition-colors">
+                      {num}
+                    </a>
+                  ))}
+                </span>
               </div>
-              <div className="flex items-center gap-2">
-                <InstagramIcon className="w-4 h-4 text-cta shrink-0" />
+              <div className="flex items-start gap-2">
+                <InstagramIcon className="w-4 h-4 text-cta shrink-0 mt-0.5" />
                 <a
                   href={INSTAGRAM_URL}
                   target="_blank"
@@ -97,7 +99,7 @@ export default function Footer() {
           </div>
 
           {/* Explore — matches main sections */}
-          <div>
+          <div className="text-left">
             <h4 className="font-heading font-bold text-white text-sm mb-4">
               Explore
             </h4>
@@ -116,7 +118,7 @@ export default function Footer() {
           </div>
 
           {/* Courses — streams that link to college list */}
-          <div>
+          <div className="text-left">
             <h4 className="font-heading font-bold text-white text-sm mb-4">
               Courses
             </h4>
@@ -135,7 +137,7 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="text-left">
             <h4 className="font-heading font-bold text-white text-sm mb-4">
               Quick Links
             </h4>
