@@ -56,7 +56,7 @@ export default function Footer() {
               <img
                 src="/logo2.png"
                 alt="College Eduversity"
-                className="h-14 w-auto object-contain"
+                className="h-20 w-auto object-contain"
               />
             </Link>
             <p className="text-sm leading-relaxed max-w-xs text-neutral-on-dark/90">
@@ -158,7 +158,7 @@ export default function Footer() {
 
         {/* Copyright & legal */}
         <div className="flex flex-col sm:flex-row flex-wrap justify-between items-center gap-4 pt-6 text-xs text-neutral-on-dark/70">
-          <span>© 2025 College Eduversity. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} College Eduversity. All rights reserved.</span>
           <div className="flex flex-wrap justify-center gap-4">
             <Link to="/about" className="hover:text-white transition-colors">About Us</Link>
             <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>

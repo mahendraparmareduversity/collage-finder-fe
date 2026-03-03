@@ -27,7 +27,7 @@ export default function Navbar({ onCounsellingClick }: NavbarProps) {
             <img
               src="/logo.png"
               alt="College Eduversity"
-              className="h-[4rem] sm:h-[5.625rem] w-auto object-contain"
+              className="h-[5rem] sm:h-[7rem] w-auto object-contain"
             />
           </a>
 
