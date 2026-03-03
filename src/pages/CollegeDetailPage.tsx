@@ -36,6 +36,53 @@ function isValidWebsite(url: string | undefined | null): boolean {
   return true;
 }
 
+/** WhatsApp business number (India) – same as footer contact */
+const WHATSAPP_NUMBER = '918889577772';
+
+function getWhatsAppEnquiryUrl(college: CollegeDetail): string {
+  const trim = (s: string) => (s || '').trim();
+  const name = trim(college.name);
+  const location = trim(college.location || college.city || college.state || '') || '—';
+  const category = trim(college.category || '') || '—';
+  const fee =
+    college.fee?.trim() ||
+    (college.feeAmount != null ? `₹${(Number(college.feeAmount) / 100000).toFixed(1)} L` : '—');
+  const coursesList =
+    college.courses?.length &&
+    college.courses
+      .slice(0, 8)
+      .map((c) => trim(c))
+      .filter(Boolean);
+  const coursesStr = coursesList?.length
+    ? coursesList.join(', ') + (college.courses && college.courses.length > 8 ? ` (+${college.courses.length - 8} more)` : '')
+    : '—';
+
+  const lines = [
+    "Hi, I'm interested in this college:",
+    '',
+    `*College:* ${name}`,
+    `*Location:* ${location}`,
+    `*Category:* ${category}`,
+    `*Fee:* ${fee}`,
+    `*Courses:* ${coursesStr}`,
+    '',
+    'Please share more details.',
+  ];
+  const text = lines.join('\n').trim();
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+}
+
+function WhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden>
+      <path
+        fill="currentColor"
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+      />
+    </svg>
+  );
+}
+
 export default function CollegeDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
@@ -127,7 +174,7 @@ export default function CollegeDetailPage() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8">
               <div className="max-w-4xl mx-auto flex flex-col sm:flex-row sm:items-end gap-4">
-                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl bg-white/10 backdrop-blur flex items-center justify-center shrink-0 border border-white/20 overflow-hidden">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl bg-primary/20 backdrop-blur flex items-center justify-center shrink-0 border border-primary/30 overflow-hidden">
                   {isValidImageUrl(college.logoUrl) ? (
                     <img
                       src={college.logoUrl!}
@@ -167,7 +214,7 @@ export default function CollegeDetailPage() {
 
           <div className="space-y-8">
             {/* 1. Quick info */}
-            <section className="bg-white rounded-2xl border border-neutral-border p-6 shadow-sm">
+            <section className="bg-surface rounded-2xl border border-neutral-border p-6 shadow-sm">
               <h2 className="font-heading font-semibold text-lg text-neutral-text mb-4">
                 Quick info
               </h2>
@@ -224,17 +271,29 @@ export default function CollegeDetailPage() {
                   </div>
                 )}
               </dl>
-              <button
-                onClick={scrollToCTA}
-                className="mt-6 w-full sm:w-auto bg-cta hover:bg-cta-hover text-white py-3 px-6 rounded-btn font-bold text-sm transition-all"
-              >
-                Get Free Counselling
-              </button>
+              <div className="mt-6 flex flex-col sm:flex-row gap-3">
+                <button
+                  onClick={scrollToCTA}
+                  className="w-full sm:w-auto bg-cta hover:bg-cta-hover text-white py-3 px-6 rounded-btn font-bold text-sm transition-all"
+                >
+                  Get Free Counselling
+                </button>
+                <a
+                  href={getWhatsAppEnquiryUrl(college)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-[#25D366] hover:bg-[#20BD5A] text-white py-3 px-6 rounded-btn font-bold text-sm transition-all"
+                  aria-label="Enquire via WhatsApp"
+                >
+                  <WhatsAppIcon className="w-5 h-5 shrink-0" />
+                  Enquire via WhatsApp
+                </a>
+              </div>
             </section>
 
             {/* Fees as per course */}
             {(college.courses?.length > 0 || (college as CollegeDetail).courseFees?.length) && (
-              <section className="bg-white rounded-2xl border border-neutral-border p-6 shadow-sm">
+              <section className="bg-surface rounded-2xl border border-neutral-border p-6 shadow-sm">
                 <h2 className="font-heading font-semibold text-lg text-neutral-text mb-4">
                   Fees as per course
                 </h2>
@@ -285,7 +344,7 @@ export default function CollegeDetailPage() {
 
             {/* 2. About */}
             {showAbout && (
-              <section className="bg-white rounded-2xl border border-neutral-border p-6 shadow-sm min-w-0 overflow-hidden">
+              <section className="bg-surface rounded-2xl border border-neutral-border p-6 shadow-sm min-w-0 overflow-hidden">
                 <h2 className="font-heading font-semibold text-lg text-neutral-text mb-3">
                   About
                 </h2>
@@ -297,7 +356,7 @@ export default function CollegeDetailPage() {
 
             {/* 3. Highlights */}
             {college.highlights && college.highlights.length > 0 && (
-              <section className="bg-white rounded-2xl border border-neutral-border p-6 shadow-sm min-w-0 overflow-hidden">
+              <section className="bg-surface rounded-2xl border border-neutral-border p-6 shadow-sm min-w-0 overflow-hidden">
                 <h2 className="font-heading font-semibold text-lg text-neutral-text mb-3">
                   Highlights
                 </h2>
@@ -314,7 +373,7 @@ export default function CollegeDetailPage() {
 
             {/* 4. Eligibility */}
             {showEligibility && (
-              <section className="bg-white rounded-2xl border border-neutral-border p-6 shadow-sm min-w-0 overflow-hidden">
+              <section className="bg-surface rounded-2xl border border-neutral-border p-6 shadow-sm min-w-0 overflow-hidden">
                 <h2 className="font-heading font-semibold text-lg text-neutral-text mb-3">
                   Eligibility
                 </h2>
@@ -326,7 +385,7 @@ export default function CollegeDetailPage() {
 
             {/* 5. Facilities */}
             {college.facilities && college.facilities.length > 0 && (
-              <section className="bg-white rounded-2xl border border-neutral-border p-6 shadow-sm">
+              <section className="bg-surface rounded-2xl border border-neutral-border p-6 shadow-sm">
                 <h2 className="font-heading font-semibold text-lg text-neutral-text mb-3">
                   Facilities
                 </h2>
@@ -345,7 +404,7 @@ export default function CollegeDetailPage() {
 
             {/* 6. Contact */}
             {(showWebsite || college.phone || college.email || college.address) && (
-              <section className="bg-white rounded-2xl border border-neutral-border p-6 shadow-sm min-w-0 overflow-hidden">
+              <section className="bg-surface rounded-2xl border border-neutral-border p-6 shadow-sm min-w-0 overflow-hidden">
                 <h2 className="font-heading font-semibold text-lg text-neutral-text mb-4">
                   Contact
                 </h2>

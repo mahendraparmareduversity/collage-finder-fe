@@ -33,7 +33,7 @@ export default function SectionHeader({
           {highlight ? (
             <>
               {parts[0]}
-              <span className="text-primary">{highlight}</span>
+              <span className={dark ? 'text-white' : 'text-primary'}>{highlight}</span>
               {parts[1]}
             </>
           ) : (

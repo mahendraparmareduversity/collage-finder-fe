@@ -53,7 +53,7 @@ export default function CTASection({ courses = [], onSubmit }: CTASectionProps) 
   return (
     <section
       id="cta"
-      className="py-20 px-4 sm:px-6 bg-neutral-bg"
+      className="py-20 px-4 sm:px-6 bg-section-gradient"
     >
       <div
         ref={ref}
@@ -75,7 +75,7 @@ export default function CTASection({ courses = [], onSubmit }: CTASectionProps) 
         </p>
 
         <div className="space-y-3 max-w-md mx-auto text-left">
-          <div className="flex items-center border-2 border-neutral-border focus-within:border-cta rounded-lg bg-white overflow-hidden transition-colors px-3 gap-2">
+          <div className="flex items-center border-2 border-neutral-border focus-within:border-cta rounded-lg bg-surface overflow-hidden transition-colors px-3 gap-2">
             <Phone className="w-4 h-4 text-neutral-muted shrink-0" />
             <input
               type="tel"
@@ -86,7 +86,7 @@ export default function CTASection({ courses = [], onSubmit }: CTASectionProps) 
               className="flex-1 py-3 outline-none text-sm text-neutral-text placeholder-neutral-muted"
             />
           </div>
-          <div className="flex items-center border-2 border-neutral-border focus-within:border-cta rounded-lg bg-white overflow-hidden transition-colors px-3 gap-2">
+          <div className="flex items-center border-2 border-neutral-border focus-within:border-cta rounded-lg bg-surface overflow-hidden transition-colors px-3 gap-2">
             <User className="w-4 h-4 text-neutral-muted shrink-0" />
             <input
               type="text"
@@ -96,7 +96,7 @@ export default function CTASection({ courses = [], onSubmit }: CTASectionProps) 
               className="flex-1 py-3 outline-none text-sm text-neutral-text placeholder-neutral-muted"
             />
           </div>
-          <div className="flex items-center border-2 border-neutral-border focus-within:border-cta rounded-lg bg-white overflow-hidden transition-colors px-3 gap-2">
+          <div className="flex items-center border-2 border-neutral-border focus-within:border-cta rounded-lg bg-surface overflow-hidden transition-colors px-3 gap-2">
             <Mail className="w-4 h-4 text-neutral-muted shrink-0" />
             <input
               type="email"
@@ -107,7 +107,7 @@ export default function CTASection({ courses = [], onSubmit }: CTASectionProps) 
             />
           </div>
           {courses.length > 0 && (
-            <div className="flex items-center border-2 border-neutral-border focus-within:border-cta rounded-lg bg-white overflow-hidden transition-colors px-3 gap-2">
+            <div className="flex items-center border-2 border-neutral-border focus-within:border-cta rounded-lg bg-surface overflow-hidden transition-colors px-3 gap-2">
               <BookOpen className="w-4 h-4 text-neutral-muted shrink-0" />
               <select
                 value={courseId}
@@ -121,7 +121,7 @@ export default function CTASection({ courses = [], onSubmit }: CTASectionProps) 
               </select>
             </div>
           )}
-          <div className="flex items-start border-2 border-neutral-border focus-within:border-cta rounded-lg bg-white overflow-hidden transition-colors px-3 gap-2 pt-2">
+          <div className="flex items-start border-2 border-neutral-border focus-within:border-cta rounded-lg bg-surface overflow-hidden transition-colors px-3 gap-2 pt-2">
             <MessageSquare className="w-4 h-4 text-neutral-muted shrink-0 mt-3" />
             <textarea
               value={description}

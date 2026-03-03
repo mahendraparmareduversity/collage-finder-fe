@@ -262,6 +262,7 @@ export const COLLEGES: College[] = [
 
 export const INDIAN_STATES = [
   'All India',
+  'Abroad study',
   'Madhya Pradesh',
   'Maharashtra',
   'Delhi',

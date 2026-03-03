@@ -1,6 +1,27 @@
 import { Calendar, MapPin } from 'lucide-react';
 import type { ApiEvent } from '../../types';
 
+const CARD_GRADIENTS = [
+  'linear-gradient(165deg, #E0E8F5 0%, #D0DAEB 40%, #E2E8F0 100%)',
+  'linear-gradient(165deg, #FDF0E8 0%, #F5E4D8 40%, #EDE8E4 100%)',
+  'linear-gradient(165deg, #D8E2F0 0%, #E4EAEF 50%, #ECEEF2 100%)',
+  'linear-gradient(165deg, #F5E8E0 0%, #EDE0D8 50%, #E6E2DE 100%)',
+  'linear-gradient(165deg, #E4ECF5 0%, #DAE2EA 40%, #E8ECF0 100%)',
+  'linear-gradient(165deg, #EDE4E8 0%, #E8E0E4 50%, #F0ECEE 100%)',
+  'linear-gradient(165deg, #E0E4EC 0%, #E8EAEE 50%, #EEF0F2 100%)',
+  'linear-gradient(165deg, #F0E8E4 0%, #E8E2DE 50%, #EEE8E4 100%)',
+];
+
+function hashId(id: string): number {
+  let h = 0;
+  for (let i = 0; i < id.length; i++) h = ((h << 5) - h) + id.charCodeAt(i) | 0;
+  return Math.abs(h);
+}
+
+function getCardGradient(id: string): string {
+  return CARD_GRADIENTS[hashId(id) % CARD_GRADIENTS.length];
+}
+
 function formatEventDate(start: string, end: string): string {
   try {
     const s = new Date(start);
@@ -19,22 +40,24 @@ interface EventCardProps {
 
 export default function EventCard({ event, onView }: EventCardProps) {
   const dateStr = formatEventDate(event.startDate, event.endDate);
+  const cardGradient = getCardGradient(event.id);
 
   return (
     <div
-      className="bg-white rounded-2xl overflow-hidden border border-neutral-border hover:border-cta hover:-translate-y-2 hover:shadow-card transition-all duration-300 cursor-pointer group"
+      className="rounded-2xl overflow-hidden border-2 border-primary/15 hover:border-primary/40 hover:-translate-y-2 hover:shadow-card-hover transition-all duration-300 cursor-pointer group"
+      style={{ background: cardGradient }}
       onClick={() => onView(event.id)}
     >
-      <div className="h-44 bg-neutral-bg overflow-hidden relative">
+      <div className="h-44 bg-gradient-to-br from-navy to-navy-mid overflow-hidden relative">
         {event.imageUrl ? (
           <img
             src={event.imageUrl}
             alt=""
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-navy to-navy-mid flex items-center justify-center">
-            <Calendar className="w-14 h-14 text-white/30" />
+            <Calendar className="w-14 h-14 text-neutral-on-dark/40 group-hover:text-neutral-on-dark/60 transition-colors duration-300" />
           </div>
         )}
         <div className="absolute top-3 right-3">

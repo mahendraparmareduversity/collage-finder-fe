@@ -20,7 +20,7 @@ export default function Button({
     primary:
       'bg-cta hover:bg-cta-hover text-white py-3 px-5 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-cta/30',
     secondary:
-      'bg-transparent border-2 border-white text-white py-3 px-5 hover:bg-white/10',
+      'bg-transparent border-2 border-primary/40 text-neutral-on-dark py-3 px-5 hover:bg-primary/20',
     outline:
       'bg-transparent border-2 border-cta text-cta hover:bg-cta hover:text-white py-3 px-5',
     ghost:

@@ -12,7 +12,7 @@ export default function PlacementInsightsSection() {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section id="placements" className="bg-white py-20 px-4 sm:px-6 border-t border-neutral-border">
+    <section id="placements" className="bg-section-gradient py-20 px-4 sm:px-6 border-t border-primary/10">
       <div
         ref={ref}
         className={`max-w-7xl mx-auto transition-all duration-700 ${

@@ -12,7 +12,7 @@ export default function StudentReviewsSection() {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section id="reviews" className="bg-neutral-bg py-20 px-4 sm:px-6">
+    <section id="reviews" className="bg-section-gradient py-20 px-4 sm:px-6">
       <div
         ref={ref}
         className={`max-w-7xl mx-auto transition-all duration-700 ${
@@ -28,7 +28,7 @@ export default function StudentReviewsSection() {
           {REVIEWS.map((r) => (
             <div
               key={r.name}
-              className="bg-white rounded-xl p-6 border border-neutral-border shadow-sm"
+              className="bg-surface rounded-xl p-6 border border-neutral-border shadow-sm"
             >
               <div className="flex gap-0.5 mb-1">
                 {[1, 2, 3, 4, 5].map((i) => (

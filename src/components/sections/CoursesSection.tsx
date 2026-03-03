@@ -26,7 +26,7 @@ export default function CoursesSection({
   const useApiStreams = streams.length > 0 && onStreamSelect;
 
   return (
-    <section id="courses" className="bg-white py-20 px-4 sm:px-6">
+    <section id="courses" className="bg-section-gradient py-20 px-4 sm:px-6">
       <div
         ref={ref}
         className={`max-w-7xl mx-auto transition-all duration-700 ${

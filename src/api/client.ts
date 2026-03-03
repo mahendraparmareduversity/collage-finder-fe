@@ -1,5 +1,5 @@
 // Use env or default to localhost:3001 so API is called when backend runs there
-const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3001';
+const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5000';
 
 export interface ApiError {
   success: false;

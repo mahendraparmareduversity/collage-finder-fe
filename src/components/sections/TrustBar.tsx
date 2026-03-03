@@ -9,7 +9,7 @@ const ITEMS = [
 
 export default function TrustBar() {
   return (
-    <section className="bg-white border-b border-neutral-border py-4">
+    <section className="bg-section-gradient border-b border-primary/10 py-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-10 text-neutral-muted text-sm font-medium">
           {ITEMS.map(({ Icon, text }) => (

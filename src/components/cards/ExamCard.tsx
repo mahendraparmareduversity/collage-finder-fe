@@ -7,7 +7,7 @@ interface ExamCardProps {
 
 export default function ExamCard({ exam }: ExamCardProps) {
   return (
-    <div className="bg-white rounded-xl p-5 border-2 border-neutral-border hover:border-cta hover:-translate-y-1 hover:shadow-card transition-all duration-300 cursor-pointer">
+    <div className="bg-surface-light rounded-xl p-5 border-2 border-primary/10 hover:border-cta hover:-translate-y-1 hover:shadow-card-hover transition-all duration-300 cursor-pointer hover:scale-[1.02]">
       <div className="text-3xl mb-3">{exam.emoji}</div>
       <h3 className="font-heading font-semibold text-neutral-text text-lg mb-0.5">
         {exam.name}

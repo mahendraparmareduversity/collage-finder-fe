@@ -24,7 +24,7 @@ export default function EventsSection({
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section id="events" className="bg-neutral-bg py-20 px-4 sm:px-6">
+    <section id="events" className="bg-section-gradient py-20 px-4 sm:px-6">
       <div
         ref={ref}
         className={`max-w-7xl mx-auto transition-all duration-700 ${
@@ -33,8 +33,8 @@ export default function EventsSection({
       >
         <SectionHeader
           eyebrow="What’s On"
-          title="Upcoming "
-          highlight="Events"
+          title="Latest "
+          highlight="Updates"
         />
 
         {loading ? (
@@ -43,7 +43,7 @@ export default function EventsSection({
           </div>
         ) : events.length === 0 ? (
           <p className="text-neutral-muted text-center py-12">
-            No upcoming events at the moment. Check back soon.
+            No latest updates at the moment. Check back soon.
           </p>
         ) : (
           <>
@@ -62,7 +62,7 @@ export default function EventsSection({
                   {loadingMore ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
                   ) : null}
-                  Load more events
+                  Load more updates
                 </button>
               </div>
             )}

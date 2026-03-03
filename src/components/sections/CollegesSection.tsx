@@ -51,7 +51,7 @@ export default function CollegesSection({
   const isAllSelected = !filters.courseId;
 
   return (
-    <section id="colleges" className="bg-white py-20 px-4 sm:px-6">
+    <section id="colleges" className="bg-colleges-section py-20 px-4 sm:px-6">
       <div
         ref={ref}
         className={`max-w-7xl mx-auto transition-all duration-700 ${
@@ -94,7 +94,7 @@ export default function CollegesSection({
                 onClick={() => onCourseChange(null)}
                 className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                   isAllSelected
-                    ? 'bg-white text-neutral-text shadow-md border border-neutral-border'
+                    ? 'bg-surface text-neutral-text shadow-md border border-neutral-border'
                     : 'text-neutral-muted hover:text-neutral-text'
                 }`}
               >
@@ -108,7 +108,7 @@ export default function CollegesSection({
                     onClick={() => onCourseChange(c._id)}
                     className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                       isSelected
-                        ? 'bg-white text-neutral-text shadow-md border border-neutral-border'
+                        ? 'bg-surface text-neutral-text shadow-md border border-neutral-border'
                         : 'text-neutral-muted hover:text-neutral-text'
                     }`}
                   >
@@ -124,7 +124,7 @@ export default function CollegesSection({
                 onClick={() => onCategoryChange(cat)}
                 className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                   filters.category === cat
-                    ? 'bg-white text-neutral-text shadow-md border border-neutral-border'
+                    ? 'bg-surface text-neutral-text shadow-md border border-neutral-border'
                     : 'text-neutral-muted hover:text-neutral-text'
                 }`}
               >

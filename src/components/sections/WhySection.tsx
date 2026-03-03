@@ -31,11 +31,20 @@ export default function WhySection() {
   return (
     <section
       className="py-20 px-4 sm:px-6 relative overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, #1E2A45 0%, #2A3B60 100%)' }}
+      style={{ background: 'linear-gradient(135deg, #1E3550 0%, #2A476F 100%)' }}
     >
+      {/* Subtle white grid on blue – same as hero */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
+          backgroundSize: '50px 50px',
+        }}
+      />
       <div
         ref={ref}
-        className={`max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center transition-all duration-700 ${
+        className={`relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center transition-all duration-700 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
       >
@@ -57,7 +66,7 @@ export default function WhySection() {
             {FEATURES.map(({ Icon, title, desc }) => (
               <div
                 key={title}
-                className="rounded-xl p-4 hover:-translate-y-1 transition-all border border-white/10"
+                className="rounded-xl p-4 hover:-translate-y-1 transition-all border border-primary/20"
                 style={{ background: 'rgba(255,255,255,0.05)' }}
               >
                 <div className="w-10 h-10 rounded-lg bg-cta/20 flex items-center justify-center mb-2">
@@ -81,7 +90,7 @@ export default function WhySection() {
 
         <div className="grid grid-cols-2 gap-4">
           {STATS.map((s) => {
-            const cardClass = `rounded-2xl p-6 text-center transition-all border border-white/10 ${
+            const cardClass = `rounded-2xl p-6 text-center transition-all border border-primary/20 ${
               s.wide ? 'col-span-2' : ''
             } ${s.isEmail ? 'hover:border-cta/50' : ''}`;
             const cardStyle = {

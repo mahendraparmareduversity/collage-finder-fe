@@ -140,7 +140,7 @@ export default function EventDetailPage() {
           </Link>
 
           <div className="space-y-6">
-            <div className="bg-white rounded-2xl border border-neutral-border p-6 shadow-sm flex flex-wrap gap-4">
+            <div className="bg-surface rounded-2xl border border-neutral-border p-6 shadow-sm flex flex-wrap gap-4">
               {dateStr && (
                 <div className="flex items-center gap-2 text-neutral-text">
                   <Calendar className="w-5 h-5 text-cta shrink-0" />
@@ -156,7 +156,7 @@ export default function EventDetailPage() {
             </div>
 
             {event.longDescription && event.longDescription.trim() && (
-              <section className="bg-white rounded-2xl border border-neutral-border p-6 shadow-sm">
+              <section className="bg-surface rounded-2xl border border-neutral-border p-6 shadow-sm">
                 <h2 className="font-heading font-semibold text-lg text-neutral-text mb-4">
                   About this event
                 </h2>

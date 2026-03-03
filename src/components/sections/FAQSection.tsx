@@ -11,7 +11,7 @@ export default function FAQSection() {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section id="faq" className="bg-neutral-bg py-20 px-4 sm:px-6">
+    <section id="faq" className="bg-section-gradient py-20 px-4 sm:px-6">
       <div
         ref={ref}
         className={`max-w-3xl mx-auto transition-all duration-700 ${
@@ -23,7 +23,7 @@ export default function FAQSection() {
           {FAQ_ITEMS.map((item) => (
             <li
               key={item.q}
-              className="bg-white rounded-lg p-5 border border-neutral-border"
+              className="bg-surface-light rounded-lg p-5 border-2 border-primary/10 hover:border-primary/20 transition-colors duration-300"
             >
               <p className="font-heading font-semibold text-neutral-text mb-2">{item.q}</p>
               <p className="text-neutral-muted text-sm leading-relaxed">{item.a}</p>

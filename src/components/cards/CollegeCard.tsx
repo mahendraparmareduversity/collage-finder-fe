@@ -35,7 +35,7 @@ export default function CollegeCard({
 
   return (
     <div
-      className="bg-white rounded-2xl overflow-hidden border border-neutral-border hover:border-cta hover:-translate-y-2 hover:shadow-card transition-all duration-300 cursor-pointer group"
+      className="rounded-2xl overflow-hidden border border-neutral-border bg-white hover:border-primary/30 hover:-translate-y-2 hover:shadow-card-hover transition-all duration-300 cursor-pointer group animate-fade-up"
       onClick={() => onView(college.id)}
     >
       <div className="h-44 bg-gradient-to-br from-navy to-navy-mid flex items-center justify-center relative overflow-hidden">
@@ -46,9 +46,9 @@ export default function CollegeCard({
             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         ) : null}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(30,58,138,0.2),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(42,71,111,0.25),transparent_60%)]" />
         {!imageUrl && (
-          <Building2 className="w-14 h-14 text-white/30 group-hover:text-white/50 group-hover:scale-110 transition-all duration-500 relative z-10" />
+          <Building2 className="w-14 h-14 text-neutral-on-dark/40 group-hover:text-neutral-on-dark/70 group-hover:scale-110 transition-all duration-500 relative z-10" />
         )}
         <div className="absolute top-3 right-3 z-10">
           <Badge variant="cta">{college.badge}</Badge>
@@ -71,7 +71,7 @@ export default function CollegeCard({
               {college.courses.slice(0, 4).map((course) => (
                 <span
                   key={course}
-                  className="bg-primary/10 text-primary text-xs font-semibold px-2.5 py-1 rounded-full"
+                  className="bg-primary/15 text-primary font-semibold text-xs px-2.5 py-1 rounded-full border border-primary/20"
                 >
                   {course}
                 </span>
@@ -93,7 +93,7 @@ export default function CollegeCard({
               e.stopPropagation();
               onApply(college.name);
             }}
-            className="bg-cta hover:bg-cta-hover text-white py-2 px-4 rounded-btn text-xs font-bold transition-all hover:shadow-md hover:shadow-cta/30 shrink-0"
+            className="bg-cta hover:bg-cta-hover text-white py-2 px-4 rounded-btn text-xs font-bold transition-all hover:shadow-card-cta shrink-0"
           >
             Apply Now
           </button>

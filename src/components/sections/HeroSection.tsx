@@ -20,7 +20,7 @@ export default function HeroSection({
     <section
       className="min-h-[90vh] flex items-center relative overflow-hidden py-20"
       style={{
-        background: 'linear-gradient(135deg, #1E2A45 0%, #2A3B60 100%)',
+        background: 'linear-gradient(135deg, #1E3550 0%, #2A476F 100%)',
       }}
     >
       <div className="absolute inset-0 pointer-events-none opacity-[0.03]"

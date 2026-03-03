@@ -42,9 +42,9 @@ export default function CourseCard({ course, onClick, variant = 'default' }: Cou
     <button
       onClick={onClick}
       className={cn(
-        'group text-center rounded-2xl border-2 border-neutral-border/60 p-5 min-h-[180px] flex flex-col items-center justify-between',
-        'hover:border-cta hover:-translate-y-1.5 hover:shadow-card transition-all duration-300 w-full',
-        variant === 'alternate' ? 'bg-neutral-bg/70' : 'bg-white'
+        'group text-center rounded-2xl border-2 border-primary/15 p-5 min-h-[180px] flex flex-col items-center justify-between',
+        'hover:border-cta hover:-translate-y-1.5 hover:shadow-card-hover hover:scale-[1.02] transition-all duration-300 w-full',
+        variant === 'alternate' ? 'bg-surface-warm' : 'bg-surface-light'
       )}
     >
       <div className="flex flex-col items-center">

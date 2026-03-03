@@ -37,7 +37,7 @@ export default function SearchSection({
   const showCourseDropdown = courses.length > 0 && onCourseChange;
 
   return (
-    <section className="bg-white shadow-sm border-b border-neutral-border py-10 px-4 sm:px-6">
+    <section className="bg-section-gradient shadow-sm border-b border-primary/10 py-10 px-4 sm:px-6">
       <div className="max-w-4xl mx-auto">
         <p className="font-heading font-semibold text-center text-neutral-text text-lg mb-5">
           Search verified colleges across India
@@ -59,7 +59,7 @@ export default function SearchSection({
             <select
               value={selectedCourseId ?? ''}
               onChange={(e) => onCourseChange(e.target.value ? e.target.value : null)}
-              className="w-full sm:w-auto sm:min-w-[160px] px-4 py-3 sm:py-4 bg-white border-b sm:border-b-0 sm:border-l border-neutral-border text-neutral-muted text-sm outline-none cursor-pointer"
+              className="w-full sm:w-auto sm:min-w-[160px] px-4 py-3 sm:py-4 bg-surface border-b sm:border-b-0 sm:border-l border-neutral-border text-neutral-muted text-sm outline-none cursor-pointer"
             >
               <option value="">All courses</option>
               {courses.map((c) => (
@@ -71,7 +71,7 @@ export default function SearchSection({
           ) : (
             <select
               onChange={(e) => onCategoryChange(e.target.value as CourseCategory)}
-              className="w-full sm:w-auto sm:min-w-[180px] px-4 py-3 sm:py-4 bg-white border-b sm:border-b-0 sm:border-l border-neutral-border text-neutral-muted text-sm outline-none cursor-pointer"
+              className="w-full sm:w-auto sm:min-w-[180px] px-4 py-3 sm:py-4 bg-surface border-b sm:border-b-0 sm:border-l border-neutral-border text-neutral-muted text-sm outline-none cursor-pointer"
             >
               {COURSE_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value}>

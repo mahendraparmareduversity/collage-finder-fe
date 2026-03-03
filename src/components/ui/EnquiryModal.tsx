@@ -90,10 +90,10 @@ export default function EnquiryModal({
 
       {/* Floating modal */}
       <div
-        className="relative w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl bg-white shadow-2xl border border-neutral-border"
+        className="relative w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl bg-surface shadow-2xl border border-neutral-border"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="sticky top-0 flex items-center justify-between p-4 border-b border-neutral-border bg-white rounded-t-2xl z-10">
+        <div className="sticky top-0 flex items-center justify-between p-4 border-b border-neutral-border bg-surface rounded-t-2xl z-10">
           <h2 id="enquiry-modal-title" className="font-heading font-bold text-lg text-neutral-text">
             Get Free Counselling
           </h2>
