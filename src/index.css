@@ -57,18 +57,26 @@
     background-color: rgba(42, 71, 111, 0.06);
   }
 
-  /* Section gradient: blue + orange + check pattern, 50px grid – stronger intensity */
-  .bg-colleges-section,
+  /* Colleges section: gradient only (no grid) */
+  .bg-colleges-section {
+    position: relative;
+    background-color: #DCE4F0;
+    background-image:
+      linear-gradient(135deg, rgba(42, 71, 111, 0.28) 0%, transparent 50%),
+      linear-gradient(225deg, rgba(244, 124, 60, 0.24) 0%, transparent 50%),
+      linear-gradient(160deg, #C8D8EE 0%, #DCE4F0 30%, #EDE6E0 60%, #FCE4D8 100%);
+    background-size: 100% 100%, 100% 100%, 100% 100%;
+  }
+
+  /* Other sections: same blue + orange gradient, no grid */
   .bg-section-gradient {
     position: relative;
     background-color: #DCE4F0;
     background-image:
-      linear-gradient(rgba(42, 71, 111, 0.12) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(42, 71, 111, 0.12) 1px, transparent 1px),
       linear-gradient(135deg, rgba(42, 71, 111, 0.28) 0%, transparent 50%),
       linear-gradient(225deg, rgba(244, 124, 60, 0.24) 0%, transparent 50%),
       linear-gradient(160deg, #C8D8EE 0%, #DCE4F0 30%, #EDE6E0 60%, #FCE4D8 100%);
-    background-size: 50px 50px, 50px 50px, 100% 100%, 100% 100%, 100% 100%;
+    background-size: 100% 100%, 100% 100%, 100% 100%;
   }
 
   /* Gray section: light gray background + subtle gray grid (original style) */
