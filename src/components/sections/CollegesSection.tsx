@@ -145,7 +145,7 @@ export default function CollegesSection({
                 className={`px-4 py-1.5 rounded-full border text-xs font-semibold transition-all ${
                   filters.state === filterValue
                     ? 'bg-primary border-primary text-white hover:bg-primary hover:text-white'
-                    : 'border-neutral-border text-neutral-muted hover:border-primary hover:text-primary'
+                    : 'bg-[#F47C3C] border-[#F47C3C] text-white hover:bg-[#E06D2E] hover:border-[#E06D2E]'
                 }`}
               >
                 {displayState}

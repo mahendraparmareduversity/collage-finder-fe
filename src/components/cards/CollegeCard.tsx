@@ -108,7 +108,7 @@ export default function CollegeCard({
                 e.stopPropagation();
                 onApply(college.name);
               }}
-              className="bg-cta hover:bg-cta-hover text-white py-2 px-4 rounded-btn text-xs font-bold transition-all hover:shadow-card-cta"
+              className="bg-[#F47C3C] hover:bg-[#E06D2E] text-white py-2 px-4 rounded-btn text-xs font-bold transition-all hover:shadow-card-cta"
             >
               Apply Now
             </button>
