@@ -47,14 +47,12 @@ function getWhatsAppEnquiryUrl(college: CollegeDetail): string {
   const fee =
     college.fee?.trim() ||
     (college.feeAmount != null ? `₹${(Number(college.feeAmount) / 100000).toFixed(1)} L` : '—');
-  const coursesList =
-    college.courses?.length &&
-    college.courses
-      .slice(0, 8)
-      .map((c) => trim(c))
-      .filter(Boolean);
-  const coursesStr = coursesList?.length
-    ? coursesList.join(', ') + (college.courses && college.courses.length > 8 ? ` (+${college.courses.length - 8} more)` : '')
+  const coursesList: string[] = (college.courses ?? [])
+    .slice(0, 8)
+    .map((c) => trim(c))
+    .filter((c): c is string => c.length > 0);
+  const coursesStr = coursesList.length
+    ? coursesList.join(', ') + ((college.courses ?? []).length > 8 ? ` (+${(college.courses ?? []).length - 8} more)` : '')
     : '—';
 
   const lines = [
