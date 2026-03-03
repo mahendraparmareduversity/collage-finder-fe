@@ -50,9 +50,11 @@ export default function CollegeCard({
         {!imageUrl && (
           <Building2 className="w-14 h-14 text-neutral-on-dark/40 group-hover:text-neutral-on-dark/70 group-hover:scale-110 transition-all duration-500 relative z-10" />
         )}
-        <div className="absolute top-3 right-3 z-10">
-          <Badge variant="cta">{college.badge}</Badge>
-        </div>
+        {college.badge?.trim() && (
+          <div className="absolute top-3 right-3 z-10">
+            <Badge variant="cta">{college.badge}</Badge>
+          </div>
+        )}
       </div>
 
       <div className="p-4">
