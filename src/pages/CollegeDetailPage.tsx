@@ -43,27 +43,10 @@ function getWhatsAppEnquiryUrl(college: CollegeDetail): string {
   const trim = (s: string) => (s || '').trim();
   const name = trim(college.name);
   const location = trim(college.location || college.city || college.state || '') || '—';
-  const category = trim(college.category || '') || '—';
-  const fee =
-    college.fee?.trim() ||
-    (college.feeAmount != null ? `₹${(Number(college.feeAmount) / 100000).toFixed(1)} L` : '—');
-  const coursesList: string[] = (college.courses ?? [])
-    .slice(0, 8)
-    .map((c) => trim(c))
-    .filter((c): c is string => c.length > 0);
-  const coursesStr = coursesList.length
-    ? coursesList.join(', ') + ((college.courses ?? []).length > 8 ? ` (+${(college.courses ?? []).length - 8} more)` : '')
-    : '—';
 
   const lines = [
-    "Hi, I'm interested in this college:",
-    '',
-    `*College:* ${name}`,
-    `*Location:* ${location}`,
-    `*Category:* ${category}`,
-    `*Fee:* ${fee}`,
-    `*Courses:* ${coursesStr}`,
-    '',
+    `Hi, I'm interested in: ${name}`,
+    `Location: ${location}`,
     'Please share more details.',
   ];
   const text = lines.join('\n').trim();
