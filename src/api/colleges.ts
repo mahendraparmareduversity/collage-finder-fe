@@ -1,5 +1,5 @@
 import { College, CollegeDetail, CourseCategory, CollegeListSort } from '../types';
-import { get } from './client';
+import { get, getApiBaseUrl } from './client';
 
 /** Query params for GET /api/colleges (Consumer API) */
 export interface CollegesListParams {
@@ -48,7 +48,7 @@ export async function fetchCollegesList(params: CollegesListParams = {}): Promis
   colleges: College[];
   pagination?: CollegesListPagination;
 }> {
-  const base = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3001';
+  const base = getApiBaseUrl();
   if (!base) return { colleges: [] };
 
   try {
@@ -83,7 +83,7 @@ export async function fetchCollegesList(params: CollegesListParams = {}): Promis
  * Returns null when not found or API unavailable.
  */
 export async function fetchCollegeBySlug(slug: string): Promise<CollegeDetail | null> {
-  const base = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3001';
+  const base = getApiBaseUrl();
   if (!base) return null;
 
   try {

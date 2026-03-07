@@ -1,4 +1,4 @@
-import { get } from './client';
+import { get, getApiBaseUrl } from './client';
 import type { ApiCourse } from '../types';
 
 interface CoursesApiResponse {
@@ -11,7 +11,7 @@ interface CoursesApiResponse {
  * Use each item's _id as courseId when calling GET /api/colleges?courseId=...
  */
 export async function fetchCourses(): Promise<ApiCourse[]> {
-  const base = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3001';
+  const base = getApiBaseUrl();
   if (!base) return [];
 
   try {

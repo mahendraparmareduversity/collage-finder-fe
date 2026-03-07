@@ -1,4 +1,4 @@
-import { get } from './client';
+import { get, getApiBaseUrl } from './client';
 import type { ApiEvent, ApiEventDetail } from '../types';
 import type { EventsListResponse } from '../types';
 
@@ -22,7 +22,7 @@ export async function fetchEvents(
   page: number = 1,
   limit: number = 12
 ): Promise<EventsListResponse> {
-  const base = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3001';
+  const base = getApiBaseUrl();
   if (!base) {
     return { events: [], pagination: { page: 1, limit, total: 0, totalPages: 0, hasNext: false, hasPrev: false } };
   }
@@ -51,7 +51,7 @@ export async function fetchEvents(
  * Fetch single event by id (GET /api/events/:id). Returns null if not found/inactive.
  */
 export async function fetchEventById(id: string): Promise<ApiEventDetail | null> {
-  const base = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3001';
+  const base = getApiBaseUrl();
   if (!base) return null;
 
   try {

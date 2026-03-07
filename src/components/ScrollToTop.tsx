@@ -1,13 +1,16 @@
+'use client';
+
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { usePathname } from 'next/navigation';
 
 /**
  * Scrolls to top on route change; when the URL has a hash (e.g. /#colleges), scrolls to that section.
  */
 export default function ScrollToTop() {
-  const { pathname, hash } = useLocation();
+  const pathname = usePathname();
 
   useEffect(() => {
+    const hash = typeof window !== 'undefined' ? window.location.hash : '';
     if (hash) {
       const id = hash.slice(1);
       const el = id ? document.getElementById(id) : null;
@@ -19,7 +22,7 @@ export default function ScrollToTop() {
       }
     }
     window.scrollTo(0, 0);
-  }, [pathname, hash]);
+  }, [pathname]);
 
   return null;
 }

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Search, ArrowRight, Loader2, X } from 'lucide-react';
 import { CourseCategory, College, FilterState } from '../../types';
 import type { ApiCourse } from '../../types';
@@ -26,6 +27,8 @@ interface CollegesSectionProps {
   onApply: (name: string) => void;
   onView: (slug: string) => void;
   onLoadMore?: () => void;
+  /** When set, show "View More" link to this URL (e.g. /colleges) with current filters as query params */
+  viewMoreHref?: string;
 }
 
 export default function CollegesSection({
@@ -42,8 +45,19 @@ export default function CollegesSection({
   onApply,
   onView,
   onLoadMore,
+  viewMoreHref,
 }: CollegesSectionProps) {
   const { ref, isVisible } = useScrollAnimation();
+  const viewMoreUrl = (() => {
+    if (!viewMoreHref) return '';
+    const params = new URLSearchParams();
+    if (filters.category && filters.category !== 'All') params.set('category', filters.category);
+    if (filters.state && filters.state !== 'All India') params.set('state', filters.state);
+    if (filters.courseId) params.set('courseId', filters.courseId);
+    if (filters.searchQuery?.trim()) params.set('search', filters.searchQuery.trim());
+    const q = params.toString();
+    return q ? `${viewMoreHref}?${q}` : viewMoreHref;
+  })();
   const showCourseTabs = courses.length > 0 && onCourseChange;
   const selectedCourse = showCourseTabs && filters.courseId
     ? courses.find((c) => c._id === filters.courseId)
@@ -187,8 +201,8 @@ export default function CollegesSection({
           </>
         )}
 
-        <div className="text-center mt-10">
-          {hasNextPage && onLoadMore ? (
+        <div className="text-center mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          {hasNextPage && onLoadMore && (
             <button
               onClick={onLoadMore}
               disabled={loading}
@@ -201,10 +215,17 @@ export default function CollegesSection({
               )}
               Load More Colleges
             </button>
-          ) : (
-            <button className="border-2 border-cta text-cta hover:bg-cta hover:text-white py-3 px-8 rounded-btn font-bold text-sm transition-all inline-flex items-center gap-2">
-              Load More Colleges <ArrowRight className="w-4 h-4" />
-            </button>
+          )}
+          {viewMoreUrl && (
+            <Link
+              href={viewMoreUrl}
+              className="border-2 border-cta text-cta hover:bg-cta hover:text-white py-3 px-8 rounded-btn font-bold text-sm transition-all inline-flex items-center gap-2"
+            >
+              View More Colleges <ArrowRight className="w-4 h-4" />
+            </Link>
+          )}
+          {!viewMoreUrl && !(hasNextPage && onLoadMore) && (
+            <span className="text-neutral-muted text-sm">Browse all colleges above or refine filters.</span>
           )}
         </div>
       </div>

@@ -1,28 +1,28 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Navbar from './components/layout/Navbar';
-import Footer from './components/layout/Footer';
-import HeroSection from './components/sections/HeroSection';
-import SearchSection from './components/sections/SearchSection';
-import CollegesSection from './components/sections/CollegesSection';
-import EventsSection from './components/sections/EventsSection';
-import CoursesSection from './components/sections/CoursesSection';
-import WhySection from './components/sections/WhySection';
-import CTASection from './components/sections/CTASection';
-import FAQSection from './components/sections/FAQSection';
-import ToastContainer from './components/ui/ToastContainer';
-import EnquiryModal, { wasEnquiryModalDismissed } from './components/ui/EnquiryModal';
-import { useColleges } from './hooks/useColleges';
-import { useCourses } from './hooks/useCourses';
-import { useEvents } from './hooks/useEvents';
-import { useStreamsPopular } from './hooks/useStreams';
-import { useToast } from './hooks/useToast';
-import { submitEnquiry, EnquirySubmitError } from './api/enquiry';
-import { CourseCategory } from './types';
-import type { EnquiryPayload } from './types';
+'use client';
 
-export default function App() {
-  const navigate = useNavigate();
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import HeroSection from '@/components/sections/HeroSection';
+import SearchSection from '@/components/sections/SearchSection';
+import CollegesSection from '@/components/sections/CollegesSection';
+import EventsSection from '@/components/sections/EventsSection';
+import CoursesSection from '@/components/sections/CoursesSection';
+import WhySection from '@/components/sections/WhySection';
+import CTASection from '@/components/sections/CTASection';
+import FAQSection from '@/components/sections/FAQSection';
+import ToastContainer from '@/components/ui/ToastContainer';
+import EnquiryModal, { wasEnquiryModalDismissed } from '@/components/ui/EnquiryModal';
+import { useColleges } from '@/hooks/useColleges';
+import { useCourses } from '@/hooks/useCourses';
+import { useEvents } from '@/hooks/useEvents';
+import { useStreamsPopular } from '@/hooks/useStreams';
+import { useToast } from '@/hooks/useToast';
+import { submitEnquiry, EnquirySubmitError } from '@/api/enquiry';
+import { CourseCategory } from '@/types';
+import type { EnquiryPayload } from '@/types';
+
+export default function HomePage() {
+  const router = useRouter();
   const { courses } = useCourses();
   const {
     colleges,
@@ -89,11 +89,11 @@ export default function App() {
   };
 
   const handleView = (slug: string) => {
-    navigate(`/college/${slug}`);
+    router.push(`/college/${slug}`);
   };
 
   const handleViewEvent = (id: string) => {
-    navigate(`/events/${id}`);
+    router.push(`/events/${id}`);
   };
 
   const handleEnquirySubmit = async (payload: EnquiryPayload) => {
@@ -114,12 +114,10 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen">
-      <Navbar onCounsellingClick={scrollToCTA} />
-
+    <>
       <main>
         <HeroSection
-          onExploreClick={scrollToColleges}
+          onExploreClick={() => router.push('/colleges')}
           onCounsellingClick={scrollToCTA}
         />
 
@@ -153,6 +151,7 @@ export default function App() {
           onApply={handleApply}
           onView={handleView}
           onLoadMore={loadMore}
+          viewMoreHref="/colleges"
         />
 
         <EventsSection
@@ -178,8 +177,6 @@ export default function App() {
         <FAQSection />
       </main>
 
-      <Footer />
-
       <EnquiryModal
         open={showEnquiryModal}
         onClose={() => setShowEnquiryModal(false)}
@@ -188,6 +185,6 @@ export default function App() {
       />
 
       <ToastContainer toasts={toasts} />
-    </div>
+    </>
   );
 }

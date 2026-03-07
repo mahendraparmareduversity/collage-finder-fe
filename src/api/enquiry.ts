@@ -1,5 +1,5 @@
 import { EnquiryPayload, EnquiryValidationError } from '../types';
-import { post } from './client';
+import { post, getApiBaseUrl } from './client';
 import type { ApiError } from './client';
 
 interface EnquirySuccessResponse {
@@ -32,7 +32,7 @@ export class EnquirySubmitError extends Error {
  * Throws EnquirySubmitError with optional field-level errors on 400.
  */
 export async function submitEnquiry(payload: EnquiryPayload): Promise<void> {
-  const base = import.meta.env.VITE_API_BASE_URL;
+  const base = getApiBaseUrl();
   if (!base) {
     // No backend: resolve so UI can show success message
     return;

@@ -1,4 +1,4 @@
-import { get } from './client';
+import { get, getApiBaseUrl } from './client';
 import type { ApiStream } from '../types';
 import type { Pagination } from '../types';
 
@@ -19,7 +19,7 @@ interface StreamsListApiResponse {
  * Fetch popular streams for "Explore Popular Courses" grid (GET /api/streams/popular).
  */
 export async function fetchPopularStreams(limit: number = 9): Promise<ApiStream[]> {
-  const base = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3001';
+  const base = getApiBaseUrl();
   if (!base) return [];
 
   try {
@@ -41,7 +41,7 @@ export async function fetchStreams(params: {
   order?: string;
   search?: string;
 } = {}): Promise<{ streams: ApiStream[]; pagination: Pagination }> {
-  const base = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3001';
+  const base = getApiBaseUrl();
   const empty = {
     streams: [],
     pagination: {

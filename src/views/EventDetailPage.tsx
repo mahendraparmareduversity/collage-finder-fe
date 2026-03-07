@@ -1,10 +1,11 @@
+'use client';
+
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { Calendar, MapPin, ArrowLeft } from 'lucide-react';
 import { fetchEventById } from '../api/events';
 import type { ApiEventDetail } from '../types';
-import Navbar from '../components/layout/Navbar';
-import Footer from '../components/layout/Footer';
 
 function formatEventDate(start: string, end: string): string {
   try {
@@ -24,7 +25,8 @@ function isValidImageUrl(url: string | undefined | null): boolean {
 }
 
 export default function EventDetailPage() {
-  const { id } = useParams<{ id: string }>();
+  const params = useParams();
+  const id = params?.id as string | undefined;
   const [event, setEvent] = useState<ApiEventDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
@@ -46,10 +48,6 @@ export default function EventDetailPage() {
       .finally(() => setLoading(false));
   }, [id]);
 
-  const scrollToCTA = () => {
-    window.location.href = '/#cta';
-  };
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-neutral-bg">
@@ -63,25 +61,21 @@ export default function EventDetailPage() {
 
   if (notFound || !event) {
     return (
-      <div className="min-h-screen">
-        <Navbar onCounsellingClick={scrollToCTA} />
-        <main className="max-w-2xl mx-auto px-4 py-20 text-center">
-          <p className="text-6xl mb-4">📅</p>
-          <h1 className="font-heading font-semibold text-xl text-neutral-text mb-2">
-            Event not found
-          </h1>
-          <p className="text-neutral-muted mb-6">
-            This event doesn't exist, has ended, or is no longer available.
-          </p>
-          <Link
-            to="/#events"
-            className="inline-flex items-center gap-2 text-cta font-semibold hover:underline"
-          >
-            <ArrowLeft className="w-4 h-4" /> Back to events
-          </Link>
-        </main>
-        <Footer />
-      </div>
+      <main className="max-w-2xl mx-auto px-4 py-20 text-center">
+        <p className="text-6xl mb-4">📅</p>
+        <h1 className="font-heading font-semibold text-xl text-neutral-text mb-2">
+          Event not found
+        </h1>
+        <p className="text-neutral-muted mb-6">
+          This event doesn&apos;t exist, has ended, or is no longer available.
+        </p>
+        <Link
+          href="/#events"
+          className="inline-flex items-center gap-2 text-cta font-semibold hover:underline"
+        >
+          <ArrowLeft className="w-4 h-4" /> Back to events
+        </Link>
+      </main>
     );
   }
 
@@ -89,10 +83,7 @@ export default function EventDetailPage() {
   const hasImage = isValidImageUrl(event.imageUrl);
 
   return (
-    <div className="min-h-screen min-w-0 overflow-x-hidden">
-      <Navbar onCounsellingClick={scrollToCTA} />
-
-      <main className="bg-neutral-bg min-w-0 overflow-x-hidden">
+    <main className="bg-neutral-bg min-w-0 overflow-x-hidden">
         <section className="w-full relative">
           <div
             className="w-full h-64 sm:h-80 md:h-96 bg-gradient-to-br from-navy to-navy-mid relative overflow-hidden"
@@ -133,7 +124,7 @@ export default function EventDetailPage() {
 
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-8 min-w-0">
           <Link
-            to="/#events"
+            href="/#events"
             className="inline-flex items-center gap-2 text-neutral-muted hover:text-cta text-sm font-medium mb-8"
           >
             <ArrowLeft className="w-4 h-4" /> Back to events
@@ -167,9 +158,6 @@ export default function EventDetailPage() {
             )}
           </div>
         </div>
-      </main>
-
-      <Footer />
-    </div>
+    </main>
   );
 }

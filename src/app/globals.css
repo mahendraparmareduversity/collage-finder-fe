@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    overflow-x: hidden;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    @apply bg-surface text-neutral-text;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Poppins', 'Inter', sans-serif;
+  }
+}
+
+@layer utilities {
+  .scale-103 {
+    transform: scale(1.03);
+  }
+
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .text-glossy-black {
+    color: #0a0a0a;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .bg-primary\/8 {
+    background-color: rgba(42, 71, 111, 0.08);
+  }
+
+  .bg-primary\/10 {
+    background-color: rgba(42, 71, 111, 0.1);
+  }
+
+  .border-primary\/15 {
+    border-color: rgba(42, 71, 111, 0.15);
+  }
+
+  .bg-primary\/6 {
+    background-color: rgba(42, 71, 111, 0.06);
+  }
+
+  .bg-colleges-section {
+    position: relative;
+    background-color: #DCE4F0;
+    background-image:
+      linear-gradient(135deg, rgba(42, 71, 111, 0.28) 0%, transparent 50%),
+      linear-gradient(225deg, rgba(244, 124, 60, 0.24) 0%, transparent 50%),
+      linear-gradient(160deg, #C8D8EE 0%, #DCE4F0 30%, #EDE6E0 60%, #FCE4D8 100%);
+    background-size: 100% 100%, 100% 100%, 100% 100%;
+  }
+
+  .bg-section-gradient {
+    position: relative;
+    background-color: #DCE4F0;
+    background-image:
+      linear-gradient(135deg, rgba(42, 71, 111, 0.28) 0%, transparent 50%),
+      linear-gradient(225deg, rgba(244, 124, 60, 0.24) 0%, transparent 50%),
+      linear-gradient(160deg, #C8D8EE 0%, #DCE4F0 30%, #EDE6E0 60%, #FCE4D8 100%);
+    background-size: 100% 100%, 100% 100%, 100% 100%;
+  }
+
+  .bg-grid-gray {
+    background-color: #F5F5F5;
+    background-image:
+      linear-gradient(to right, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .bg-grid-blue {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(135deg, #1E3550 0%, #2A476F 100%);
+    background-size: 50px 50px, 50px 50px, 100% 100%;
+  }
+}

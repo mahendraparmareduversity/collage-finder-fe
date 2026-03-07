@@ -1,8 +1,8 @@
+'use client';
+
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import Link from 'next/link';
 import { ArrowLeft, Globe, ChevronLeft } from 'lucide-react';
-import Navbar from '../components/layout/Navbar';
-import Footer from '../components/layout/Footer';
 import AnimatedSection from '../components/ui/AnimatedSection';
 import studyAbroadData from '../data/studyAbroad.json';
 
@@ -24,25 +24,17 @@ function getCardBg(name: string): string {
 }
 
 export default function StudyAbroadPage() {
-  const navigate = useNavigate();
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
-  const scrollToCTA = () => {
-    navigate('/#cta');
-    setTimeout(() => document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' }), 100);
-  };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar onCounsellingClick={scrollToCTA} />
-
-      <main className="flex-1 bg-section-gradient py-12 sm:py-16 px-4 sm:px-6">
-        <div className="max-w-5xl mx-auto">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:text-cta transition-colors mb-8"
-          >
-            <ArrowLeft className="w-4 h-4" /> Back to home
-          </Link>
+    <main className="flex-1 bg-section-gradient py-12 sm:py-16 px-4 sm:px-6">
+      <div className="max-w-5xl mx-auto">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:text-cta transition-colors mb-8"
+        >
+          <ArrowLeft className="w-4 h-4" /> Back to home
+        </Link>
 
           <div className="bg-transparent rounded-2xl p-6 sm:p-8 md:p-10 text-glossy-black">
             <h1 className="font-heading font-bold text-2xl sm:text-3xl mb-2 flex items-center gap-2">
@@ -103,9 +95,6 @@ export default function StudyAbroadPage() {
             )}
           </div>
         </div>
-      </main>
-
-      <Footer />
-    </div>
+    </main>
   );
 }

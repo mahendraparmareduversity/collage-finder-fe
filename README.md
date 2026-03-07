@@ -1,8 +1,9 @@
 # 🎓 College Eduversity — India's College Discovery Platform
 
-> Find your dream college in India. Built with **Vite + React + TypeScript + Tailwind CSS**
+> Find your dream college in India. Built with **Next.js 14 (App Router) + React + TypeScript + Tailwind CSS**
 
-![CollegeWale](https://img.shields.io/badge/Built%20with-Vite%20%2B%20React%20%2B%20TypeScript-blue)
+![Next.js](https://img.shields.io/badge/Next.js-14-black)
+![React](https://img.shields.io/badge/React-18-blue)
 ![Tailwind CSS](https://img.shields.io/badge/Styled%20with-Tailwind%20CSS-38B2AC)
 
 ---
@@ -22,44 +23,20 @@
 ## 🏗️ Project Structure
 
 ```
+app/                  # Next.js App Router
+├── layout.tsx        # Root layout (Navbar, Footer)
+├── page.tsx          # Home page
+├── globals.css
+├── colleges/         # /colleges list (SSR, filters, pagination)
+├── college/[slug]/   # College detail (SSR)
+├── events/[id]/      # Event detail
+├── terms/ privacy/ about/ study-abroad/
 src/
-├── types/           # TypeScript interfaces & types
-│   └── index.ts
-├── data/            # Static data (colleges, courses, exams)
-│   ├── colleges.ts
-│   ├── courses.ts
-│   ├── exams.ts
-│   └── index.ts
-├── hooks/           # Custom React hooks
-│   ├── useFilter.ts
-│   ├── useToast.ts
-│   └── useScrollAnimation.ts
-├── utils/
-│   └── cn.ts        # Class name utility
-├── components/
-│   ├── layout/
-│   │   ├── Navbar.tsx
-│   │   └── Footer.tsx
-│   ├── ui/          # Reusable UI atoms
-│   │   ├── Button.tsx
-│   │   ├── Badge.tsx
-│   │   ├── SectionHeader.tsx
-│   │   └── ToastContainer.tsx
-│   ├── cards/       # Card components
-│   │   ├── CollegeCard.tsx
-│   │   ├── CourseCard.tsx
-│   │   └── ExamCard.tsx
-│   └── sections/    # Page sections
-│       ├── HeroSection.tsx
-│       ├── SearchSection.tsx
-│       ├── CoursesSection.tsx
-│       ├── CollegesSection.tsx
-│       ├── WhySection.tsx
-│       ├── ExamsSection.tsx
-│       └── CTASection.tsx
-├── App.tsx
-├── main.tsx
-└── index.css
+├── app/              # (legacy; main app is in /app)
+├── components/       # Shared components
+├── views/            # Page-level views (Terms, About, etc.)
+├── hooks/ api/ data/ types/ utils/
+└── lib/              # Server API helpers (api-server.ts)
 ```
 
 ---
@@ -74,15 +51,28 @@ cd collegewale
 # Install dependencies
 npm install
 
-# Start development server
+# Start development server (http://localhost:3000)
 npm run dev
 
 # Build for production
 npm run build
 
-# Preview production build
-npm run preview
+# Run production build locally
+npm start
 ```
+
+---
+
+## 🚀 Deploy on Vercel
+
+1. **Push your code** to GitHub, GitLab, or Bitbucket.
+2. **Import the project** at [vercel.com/new](https://vercel.com/new). Vercel will detect Next.js automatically.
+3. **Environment variable (optional):** If you use a backend API for colleges/events, add:
+   - **Name:** `NEXT_PUBLIC_API_BASE_URL`
+   - **Value:** your API URL (e.g. `https://api.yourbackend.com`)
+4. Click **Deploy**. Vercel will run `npm run build` and deploy.
+
+No `vercel.json` is required; the default Next.js build is used.
 
 ---
 
@@ -90,7 +80,7 @@ npm run preview
 
 | Tool | Purpose |
 |------|---------|
-| [Vite](https://vitejs.dev/) | Build tool & dev server |
+| [Next.js 14](https://nextjs.org/) | React framework, SSR, App Router |
 | [React 18](https://react.dev/) | UI framework |
 | [TypeScript](https://www.typescriptlang.org/) | Type safety |
 | [Tailwind CSS](https://tailwindcss.com/) | Utility-first styling |

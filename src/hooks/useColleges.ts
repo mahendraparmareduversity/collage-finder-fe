@@ -2,14 +2,14 @@ import { useState, useEffect, useCallback } from 'react';
 import { College, CourseCategory, FilterState, CollegeListSort } from '../types';
 import { COLLEGES } from '../data';
 import { fetchCollegesList, CollegesListPagination } from '../api/colleges';
+import { getApiBaseUrl } from '../api/client';
 
 const DEFAULT_LIMIT = 12;
 const CATEGORY_ALL = 'All' as const;
 const STATE_ALL = 'All India';
 
 export function useColleges() {
-  // Prefer API: use when base URL is set or default (localhost:3001)
-  const baseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3001';
+  const baseUrl = getApiBaseUrl();
   const useApi = Boolean(baseUrl);
 
   const [filters, setFilters] = useState<FilterState>({

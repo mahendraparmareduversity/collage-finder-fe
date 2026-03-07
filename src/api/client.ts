@@ -1,5 +1,10 @@
-// Use env or default to localhost:3001 so API is called when backend runs there
-const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5000';
+function getApiBaseUrl(): string {
+  return 'https://school-be-1.onrender.com';
+}
+
+export { getApiBaseUrl };
+
+const BASE_URL = getApiBaseUrl();
 
 export interface ApiError {
   success: false;

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Mail, MapPin, Phone } from 'lucide-react';
 
 function InstagramIcon({ className }: { className?: string }) {
@@ -22,7 +22,7 @@ const INSTAGRAM_URL = 'https://www.instagram.com/college_eduversity?igsh=MW5wbGY
 
 export default function Footer() {
   const exploreLinks = [
-    { label: 'Top Colleges', to: '/#colleges' },
+    { label: 'Top Colleges', to: '/colleges' },
     { label: 'Explore Courses', to: '/#courses' },
     { label: 'Latest Updates', to: '/#events' },
     { label: 'Study Abroad', to: '/study-abroad' },
@@ -32,17 +32,17 @@ export default function Footer() {
   ];
 
   const courseLinks = [
-    { label: 'B.Tech / Engineering', to: '/#colleges' },
-    { label: 'MBA / PGDM', to: '/#colleges' },
-    { label: 'MBBS / Medical', to: '/#colleges' },
-    { label: 'Law (LLB)', to: '/#colleges' },
-    { label: 'B.Com / M.Com', to: '/#colleges' },
-    { label: 'BCA / MCA', to: '/#colleges' },
-    { label: 'B.Design', to: '/#colleges' },
+    { label: 'B.Tech / Engineering', to: '/colleges?category=Engineering' },
+    { label: 'MBA / PGDM', to: '/colleges?category=MBA' },
+    { label: 'MBBS / Medical', to: '/colleges?category=Medical' },
+    { label: 'Law (LLB)', to: '/colleges?category=Law' },
+    { label: 'B.Com / M.Com', to: '/colleges?category=Commerce' },
+    { label: 'BCA / MCA', to: '/colleges?category=MCA' },
+    { label: 'B.Design', to: '/colleges?category=Design' },
   ];
 
   const quickLinks = [
-    { label: 'Compare Colleges', to: '/#colleges' },
+    { label: 'Compare Colleges', to: '/colleges' },
     { label: 'Contact Us', to: '/#cta' },
   ];
 
@@ -52,7 +52,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-10 border-b border-primary/20">
           {/* Brand & Contact — left-aligned, icon and text aligned */}
           <div className="text-left">
-            <Link to="/" className="inline-block mb-4" aria-label="College Eduversity home">
+            <Link href="/" className="inline-block mb-4" aria-label="College Eduversity home">
               <img
                 src="/logo2.png"
                 alt="College Eduversity"
@@ -70,7 +70,7 @@ export default function Footer() {
               <div className="flex items-start gap-2">
                 <Mail className="w-4 h-4 text-cta shrink-0 mt-0.5" />
                 <a href={`mailto:${SUPPORT_EMAIL}`} className="hover:text-white transition-colors break-all">
-                  {SUPPORT_EMAIL}
+                  {SUPPORT_EMAIL} 
                 </a>
               </div>
               <div className="flex items-start gap-2">
@@ -107,7 +107,7 @@ export default function Footer() {
               {exploreLinks.map((link) => (
                 <li key={link.label}>
                   <Link
-                    to={link.to}
+                    href={link.to}
                     className="text-sm text-neutral-on-dark hover:text-cta transition-colors"
                   >
                     {link.label}
@@ -126,7 +126,7 @@ export default function Footer() {
               {courseLinks.map(({ label, to }) => (
                 <li key={label}>
                   <Link
-                    to={to}
+                    href={to}
                     className="text-sm text-neutral-on-dark hover:text-cta transition-colors"
                   >
                     {label}
@@ -145,7 +145,7 @@ export default function Footer() {
               {quickLinks.map(({ label, to }) => (
                 <li key={label}>
                   <Link
-                    to={to}
+                    href={to}
                     className="text-sm text-neutral-on-dark hover:text-cta transition-colors"
                   >
                     {label}
@@ -160,9 +160,9 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row flex-wrap justify-between items-center gap-4 pt-6 text-xs text-neutral-on-dark/70">
           <span>© {new Date().getFullYear()} College Eduversity. All rights reserved.</span>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link to="/about" className="hover:text-white transition-colors">About Us</Link>
-            <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-white transition-colors">Terms & Conditions</Link>
+            <Link href="/about" className="hover:text-white transition-colors">About Us</Link>
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms & Conditions</Link>
           </div>
         </div>
       </div>
