@@ -9,19 +9,7 @@ import SectionHeader from '@/components/ui/SectionHeader';
 import CollegesSearchForm from '@/components/colleges/CollegesSearchForm';
 import CollegesGrid from '@/components/colleges/CollegesGrid';
 
-const CATEGORY_TABS: CourseCategory[] = [
-  'All',
-  'Engineering',
-  'MBA',
-  'Medical',
-  'Law',
-  'Design',
-  'Commerce',
-  'Pharmacy',
-  'Architecture',
-  'Data Science',
-  'MCA',
-];
+/** Course filter options come only from the courses API (no static fallback). */
 
 const DEFAULT_PAGE = 1;
 const DEFAULT_LIMIT = 12;
@@ -66,7 +54,7 @@ export default async function CollegesPage({
   const search = (params.search as string) || '';
   const courseId = (params.courseId as string) || null;
 
-  const [courses, { colleges, pagination }] = await Promise.all([
+  const [coursesFromApi, { colleges, pagination }] = await Promise.all([
     fetchCoursesServer(),
     fetchCollegesListServer({
       page,
@@ -79,7 +67,7 @@ export default async function CollegesPage({
     }),
   ]);
 
-  const useApiCourses = courses.length > 0;
+  const showCourseFilter = coursesFromApi.length > 0;
 
   const prevUrl = page > 1 ? buildCollegesUrl(params, { page: String(page - 1) }) : null;
   const nextUrl =
@@ -107,45 +95,25 @@ export default async function CollegesPage({
           </div>
         </Suspense>
 
-        <div className="w-full flex justify-center mb-6">
-          <div className="flex gap-1 sm:gap-1.5 bg-neutral-bg rounded-xl p-1 sm:p-1.5 flex-wrap justify-center max-w-4xl">
-            {useApiCourses ? (
-              <>
-                <Link
-                  href={buildCollegesUrl(params, { courseId: '', category: 'All', page: '1' })}
-                  className={`px-3 py-2 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
-                    !courseId
-                      ? 'bg-surface text-neutral-text shadow-md border border-neutral-border'
-                      : 'text-neutral-muted hover:text-neutral-text'
-                  }`}
-                >
-                  All
-                </Link>
-                {courses.map((c) => {
-                  const isSelected = courseId === c._id;
-                  const href = buildCollegesUrl(params, { courseId: c._id, category: 'All', page: '1' });
-                  return (
-                    <Link
-                      key={c._id}
-                      href={href}
-                      className={`px-3 py-2 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
-                        isSelected
-                          ? 'bg-surface text-neutral-text shadow-md border border-neutral-border'
-                          : 'text-neutral-muted hover:text-neutral-text'
-                      }`}
-                    >
-                      {c.name}
-                    </Link>
-                  );
-                })}
-              </>
-            ) : (
-              CATEGORY_TABS.map((cat) => {
-                const href = buildCollegesUrl(params, { category: cat, page: '1' });
-                const isSelected = category === cat;
+        {showCourseFilter && (
+          <div className="w-full flex justify-center mb-6">
+            <div className="flex gap-1 sm:gap-1.5 bg-neutral-bg rounded-xl p-1 sm:p-1.5 flex-wrap justify-center max-w-4xl">
+              <Link
+                href={buildCollegesUrl(params, { courseId: '', category: 'All', page: '1' })}
+                className={`px-3 py-2 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
+                  !courseId
+                    ? 'bg-surface text-neutral-text shadow-md border border-neutral-border'
+                    : 'text-neutral-muted hover:text-neutral-text'
+                }`}
+              >
+                All
+              </Link>
+              {coursesFromApi.map((c) => {
+                const isSelected = courseId === c._id;
+                const href = buildCollegesUrl(params, { courseId: c._id, category: 'All', page: '1' });
                 return (
                   <Link
-                    key={cat}
+                    key={c._id}
                     href={href}
                     className={`px-3 py-2 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
                       isSelected
@@ -153,13 +121,13 @@ export default async function CollegesPage({
                         : 'text-neutral-muted hover:text-neutral-text'
                     }`}
                   >
-                    {cat}
+                    {c.name}
                   </Link>
                 );
-              })
-            )}
+              })}
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="w-full flex justify-center mb-8">
           <div className="flex gap-2 flex-wrap justify-center max-w-4xl px-0 sm:px-2">
