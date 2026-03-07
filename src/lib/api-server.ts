@@ -11,15 +11,12 @@ function normalizeBaseUrl(url: string): string {
   return (url || '').trim().replace(/\/+$/, '');
 }
 
+const DEFAULT_API_BASE = 'https://school-be-1.onrender.com';
+
 const getBaseUrl = () => {
   const env = normalizeBaseUrl(process.env.NEXT_PUBLIC_API_BASE_URL ?? '');
   if (env) return env;
-
-  // In production (Vercel), don't guess localhost. Use static fallback instead.
-  if (process.env.NODE_ENV === 'production') return '';
-
-  // Local dev fallback
-  return 'http://localhost:5000';
+  return DEFAULT_API_BASE;
 };
 
 const DEFAULT_LIMIT = 12;
@@ -118,19 +115,22 @@ export async function fetchCollegesListServer(
 
 /**
  * Fetch courses list for filters (GET /api/courses).
+ * Called explicitly on the colleges page so every load/refresh hits the API (no cache).
  * Returns empty array when API is not configured or on failure.
  */
 export async function fetchCoursesServer(): Promise<ApiCourse[]> {
   const base = getBaseUrl();
   if (!base) return [];
 
+  const url = `${base}/api/courses`;
   try {
-    const res = await fetch(`${base}/api/courses`, {
-      headers: { Accept: 'application/json' },
-      next: { revalidate: 60 },
+    const res = await fetch(url, {
+      headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+      cache: 'no-store',
     });
     const data = await res.json().catch(() => ({}));
     if (res.ok && data?.success && Array.isArray(data?.data)) return data.data;
+    if (res.ok && Array.isArray(data)) return data;
     return [];
   } catch {
     return [];

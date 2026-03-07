@@ -1,5 +1,10 @@
+const DEFAULT_API_BASE = 'https://school-be-1.onrender.com';
+
 function getApiBaseUrl(): string {
-  return 'https://school-be-1.onrender.com';
+  if (typeof process !== 'undefined' && process.env?.NEXT_PUBLIC_API_BASE_URL) {
+    return process.env.NEXT_PUBLIC_API_BASE_URL.replace(/\/+$/, '');
+  }
+  return DEFAULT_API_BASE;
 }
 
 export { getApiBaseUrl };
